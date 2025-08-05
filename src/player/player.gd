@@ -11,6 +11,6 @@ var damping : float = 16.0
 var frozen : bool = false
 func _physics_process(delta: float) -> void:
 	if !frozen:
-		var dir : Vector3 = input_receiver.udlr.x * camera.global_basis.x + input_receiver.udlr.x * camera.global_basis.y
+		var dir : Vector3 = input_receiver.udlr.x * camera.global_basis.x + input_receiver.udlr.y * camera.global_basis.y
 		dir = dir.limit_length()
 		apply_central_impulse(delta * acceleration * dir)

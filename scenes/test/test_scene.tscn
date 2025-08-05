@@ -1,0 +1,71 @@
+[gd_scene load_steps=4 format=3 uid="uid://dev5ncjkx8irq"]
+
+[ext_resource type="PackedScene" uid="uid://djvp0m4r78hop" path="res://src/player/Player.tscn" id="1_wvq6k"]
+
+[sub_resource type="Environment" id="Environment_wvq6k"]
+background_mode = 1
+background_color = Color(0.175781, 0.175781, 0.175781, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wvq6k"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="TestScene" type="Node3D"]
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+use_collision = true
+size = Vector3(16, 1, 16)
+
+[node name="Player" parent="." instance=ExtResource("1_wvq6k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6.5)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wvq6k")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.375, 1.5, 7.5)
+layers = 1025
+material_override = SubResource("StandardMaterial3D_wvq6k")
+use_collision = true
+size = Vector3(3.75, 3, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.375, 1.5, 4.25)
+layers = 1025
+material_override = SubResource("StandardMaterial3D_wvq6k")
+use_collision = true
+size = Vector3(3.75, 3, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.125, 1.5, 4.25)
+layers = 1025
+material_override = SubResource("StandardMaterial3D_wvq6k")
+use_collision = true
+size = Vector3(3.75, 3, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.375, 1.5, 4.25)
+layers = 1025
+material_override = SubResource("StandardMaterial3D_wvq6k")
+use_collision = true
+size = Vector3(3.75, 3, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.625)
+layers = 1025
+material_override = SubResource("StandardMaterial3D_wvq6k")
+use_collision = true
+size = Vector3(1, 3, 4.25)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.25, 3, 2.25)
+light_cull_mask = 4293919743
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 3, 2.25)
+light_cull_mask = 4293919743
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 3, 6)
+light_cull_mask = 4293919743
