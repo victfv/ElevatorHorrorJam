@@ -1,0 +1,49 @@
+[gd_scene load_steps=9 format=3 uid="uid://d0dpc0cb5khit"]
+
+[ext_resource type="PackedScene" uid="uid://cpny4gqkatb3v" path="res://Levels/Elevator.tscn" id="1_s41d2"]
+[ext_resource type="Script" uid="uid://bov67eaou12oc" path="res://Levels/LevelController.gd" id="1_uhyyw"]
+[ext_resource type="Script" uid="uid://wm3oyhh36sf2" path="res://Scripts/ClickManager.gd" id="2_gtnvv"]
+[ext_resource type="PackedScene" uid="uid://c3q3f81rhemtl" path="res://Prefabs/elevator_panel.tscn" id="3_wav5q"]
+[ext_resource type="Script" uid="uid://dff465rh567m7" path="res://Levels/FloorController.gd" id="4_xto7t"]
+[ext_resource type="PackedScene" uid="uid://c4hx6lwa87364" path="res://Levels/floor1.tscn" id="6_t80w2"]
+[ext_resource type="PackedScene" uid="uid://rxgyquvxuera" path="res://Levels/floor2.tscn" id="7_8a2b0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wav5q"]
+size = Vector3(0.264282, 1, 0.964966)
+
+[node name="Level" type="Node3D" node_paths=PackedStringArray("elevator", "floorController", "numpad")]
+script = ExtResource("1_uhyyw")
+elevator = NodePath("Elevator")
+floorController = NodePath("Floor")
+numpad = NodePath("Elevator/ElevatorPanel")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.00212, 2.75068, 1.74419)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3, 0)
+
+[node name="Elevator" parent="." instance=ExtResource("1_s41d2")]
+
+[node name="ClickManager" type="Node3D" parent="Elevator" node_paths=PackedStringArray("camera", "ui_panel", "panel_target")]
+script = ExtResource("2_gtnvv")
+camera = NodePath("../../Camera3D")
+ui_panel = NodePath("../ElevatorPanel")
+panel_target = NodePath("../Area3D")
+
+[node name="ElevatorPanel" parent="Elevator" node_paths=PackedStringArray("levelController") instance=ExtResource("3_wav5q")]
+visible = false
+levelController = NodePath("../..")
+
+[node name="Area3D" type="Area3D" parent="Elevator"]
+transform = Transform3D(0.999319, 0, -0.0369053, 0, 1, 0, 0.0369053, 0, 0.999319, 0.0922694, 0, 2.53723)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Elevator/Area3D"]
+shape = SubResource("BoxShape3D_wav5q")
+
+[node name="Floor" type="Node3D" parent="."]
+script = ExtResource("4_xto7t")
+floor_scenes = {
+11: ExtResource("6_t80w2"),
+26: ExtResource("7_8a2b0")
+}
