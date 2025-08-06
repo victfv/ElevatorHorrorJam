@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 InputManager="*res://src/input/InputManager.gd"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gridmap_converter/plugin.cfg")
+
 [input]
 
 UP={
@@ -46,6 +50,24 @@ ACTION={
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(196, 9),"global_position":Vector2(205, 57),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":true,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_render/layer_1="World"
+3d_render/layer_2="Player"
+3d_render/layer_3="Objects"
+3d_render/layer_11="VisShadows"
+3d_render/layer_16="VisLights"
+3d_physics/layer_1="World"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Enemies"
+3d_physics/layer_4="Interactible"
+3d_physics/layer_5="Objects"
+
+[physics]
+
+common/physics_jitter_fix=0.0
+common/physics_interpolation=true
 
 [rendering]
 
