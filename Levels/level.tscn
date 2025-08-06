@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://d0dpc0cb5khit"]
 
 [ext_resource type="PackedScene" uid="uid://cpny4gqkatb3v" path="res://Levels/Elevator.tscn" id="1_s41d2"]
-[ext_resource type="Script" uid="uid://bov67eaou12oc" path="res://Levels/LevelController.gd" id="1_uhyyw"]
+[ext_resource type="Script" uid="uid://bov67eaou12oc" path="res://Scripts/LevelController.gd" id="1_uhyyw"]
 [ext_resource type="Script" uid="uid://wm3oyhh36sf2" path="res://Scripts/ClickManager.gd" id="2_gtnvv"]
 [ext_resource type="PackedScene" uid="uid://c3q3f81rhemtl" path="res://Prefabs/elevator_panel.tscn" id="3_wav5q"]
-[ext_resource type="Script" uid="uid://dff465rh567m7" path="res://Levels/FloorController.gd" id="4_xto7t"]
+[ext_resource type="Script" uid="uid://dff465rh567m7" path="res://Scripts/FloorController.gd" id="4_xto7t"]
 [ext_resource type="PackedScene" uid="uid://c4hx6lwa87364" path="res://Levels/floor1.tscn" id="6_t80w2"]
 [ext_resource type="PackedScene" uid="uid://rxgyquvxuera" path="res://Levels/floor2.tscn" id="7_8a2b0"]
 
