@@ -1,45 +1,38 @@
-[gd_scene load_steps=15 format=4 uid="uid://cpny4gqkatb3v"]
+[gd_scene load_steps=14 format=4 uid="uid://cpny4gqkatb3v"]
 
 [ext_resource type="Script" uid="uid://be5awu38p851b" path="res://LevelManager/Levels/Elevator.gd" id="1_djdeb"]
 [ext_resource type="MeshLibrary" uid="uid://dm1xr2elw21od" path="res://assets/Meshlibs/floor_meshlib.tres" id="2_djdeb"]
-[ext_resource type="PackedScene" uid="uid://djvp0m4r78hop" path="res://src/player/Player.tscn" id="3_0q4yv"]
 [ext_resource type="Script" uid="uid://thqsm0npqqo" path="res://src/tools/gridmap_converter.gd" id="3_ibl23"]
-
-[sub_resource type="Environment" id="Environment_81a5s"]
-background_mode = 1
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_6gxal"]
-size = Vector2(200, 38)
 
 [sub_resource type="Animation" id="Animation_0q4yv"]
 length = 0.001
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D")
+tracks/0/path = NodePath("ElevatorDoor")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.136977, 0.064695, 3.57263)
+tracks/0/keys = PackedFloat32Array(0, 1, 0.033844, 1.30005, 3.46106)
 
 [sub_resource type="Animation" id="Animation_djdeb"]
 resource_name = "door_close"
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D")
+tracks/0/path = NodePath("ElevatorDoor")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0, 1, 0.136977, 0.064695, 3.57263, 0.933333, 1, 1.97886, 0.064695, 3.57263)
+tracks/0/keys = PackedFloat32Array(0.0333333, 1, 0.033844, 1.30005, 3.46106, 0.966667, 1, 2.03384, 1.30005, 3.46106)
 
 [sub_resource type="Animation" id="Animation_7x2w8"]
 resource_name = "door_open"
 tracks/0/type = "position_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite3D")
+tracks/0/path = NodePath("ElevatorDoor")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array(0.0333333, 1, 1.98619, 0.064695, 3.57263, 1, 1, 0.0856104, 0.064695, 3.57263)
+tracks/0/keys = PackedFloat32Array(0.0333333, 1, 2.03384, 1.30005, 3.46106, 0.966667, 1, 0.033844, 1.30005, 3.46106)
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0q4yv"]
 _data = {
@@ -89,14 +82,15 @@ instance_count = 20
 mesh = SubResource("ArrayMesh_8gnpo")
 buffer = PackedFloat32Array(1, 0, 0, 0.5, 0, 1, 0, 0.5, 0, 0, 1, 3.5, 1, 0, 0, -0.5, 0, 1, 0, 0.5, 0, 0, 1, 3.5, 1, 0, 0, -1.5, 0, 1, 0, 0.5, 0, 0, 1, 3.5, 1, 0, 0, -1.5, 0, 1, 0, 0.5, 0, 0, 1, 2.5, 1, 0, 0, -1.5, 0, 1, 0, 0.5, 0, 0, 1, 1.5, 1, 0, 0, -1.5, 0, 1, 0, 0.5, 0, 0, 1, 0.5, 1, 0, 0, -1.5, 0, 1, 0, 0.5, 0, 0, 1, -0.5, 1, 0, 0, -0.5, 0, 1, 0, 0.5, 0, 0, 1, -0.5, 1, 0, 0, 0.5, 0, 1, 0, 0.5, 0, 0, 1, -0.5, 1, 0, 0, 1.5, 0, 1, 0, 0.5, 0, 0, 1, -0.5, 1, 0, 0, 2.5, 0, 1, 0, 0.5, 0, 0, 1, -0.5, 1, 0, 0, 3.5, 0, 1, 0, 0.5, 0, 0, 1, -0.5, 1, 0, 0, 4.5, 0, 1, 0, 0.5, 0, 0, 1, -0.5, 1, 0, 0, 5.5, 0, 1, 0, 0.5, 0, 0, 1, -0.5, 1, 0, 0, 5.5, 0, 1, 0, 0.5, 0, 0, 1, 0.5, 1, 0, 0, 5.5, 0, 1, 0, 0.5, 0, 0, 1, 1.5, 1, 0, 0, 5.5, 0, 1, 0, 0.5, 0, 0, 1, 2.5, 1, 0, 0, 5.5, 0, 1, 0, 0.5, 0, 0, 1, 3.5, 1, 0, 0, 4.5, 0, 1, 0, 0.5, 0, 0, 1, 3.5, 1, 0, 0, 3.5, 0, 1, 0, 0.5, 0, 0, 1, 3.5)
 
+[sub_resource type="BoxMesh" id="BoxMesh_81a5s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_81a5s"]
+
 [node name="Elevator" type="Node3D"]
 script = ExtResource("1_djdeb")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_81a5s")
-
 [node name="OmniLight3D4" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63785, 3, 2.07187)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.63785, 2.00958, 2.07187)
 light_cull_mask = 4293919743
 shadow_enabled = true
 omni_range = 14.75
@@ -120,20 +114,23 @@ data = {
 script = ExtResource("3_ibl23")
 visibility_layers = 1025
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.136977, 0.064695, 3.57263)
-texture = SubResource("PlaceholderTexture2D_6gxal")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_0q4yv")
 }
 
-[node name="Player" parent="." instance=ExtResource("3_0q4yv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.08292, 0.829102, 1.77599)
-
 [node name="GridMapWalls Bake" type="Node3D" parent="."]
 
-[node name="@MultiMeshInstance3D@55396" type="MultiMeshInstance3D" parent="GridMapWalls Bake"]
+[node name="@MultiMeshInstance3D@23918" type="MultiMeshInstance3D" parent="GridMapWalls Bake"]
 layers = 1025
 multimesh = SubResource("MultiMesh_ibl23")
+
+[node name="ElevatorDoor" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.02537, 0, 0, 0, 2.57343, 0, 0, 0, 0.489271, 0.033844, 1.30005, 3.46106)
+layers = 1025
+mesh = SubResource("BoxMesh_81a5s")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ElevatorDoor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ElevatorDoor/StaticBody3D"]
+shape = SubResource("BoxShape3D_81a5s")

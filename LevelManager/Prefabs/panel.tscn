@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://yjn66y4wpl2l"]
+
+[ext_resource type="Script" uid="uid://bem0vuuoc5g85" path="res://LevelManager/Scripts/PanelInteractable.gd" id="1_ful88"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_81a5s"]
+size = Vector3(1, 2.9259, 1)
+
+[node name="Panel" type="Area3D"]
+collision_layer = 8
+collision_mask = 0
+script = ExtResource("1_ful88")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.236267, 0)
+shape = SubResource("BoxShape3D_81a5s")
