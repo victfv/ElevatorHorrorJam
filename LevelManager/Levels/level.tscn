@@ -34,11 +34,12 @@ levelController = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62352, 2.80944)
 panelUI = NodePath("../ElevatorPanel")
 
-[node name="Floor" type="Node3D" parent="."]
+[node name="Floor" type="Node3D" parent="." node_paths=PackedStringArray("current_floor_instance")]
 script = ExtResource("4_xto7t")
 floor_scenes = {
 11: ExtResource("6_t80w2"),
 26: ExtResource("7_8a2b0")
 }
+current_floor_instance = NodePath("Floor2")
 
 [node name="Floor2" parent="Floor" instance=ExtResource("7_8a2b0")]

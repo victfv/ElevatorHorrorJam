@@ -4,7 +4,7 @@ class_name FloorController
 @export var floor_scene_path_base: String = "res://Floors/Floor"
 @export var floor_scenes: Dictionary  # key: int, value: PackedScene
 
-var current_floor_instance: Node = null
+@export var current_floor_instance: Node = null
 
 func check_flooar (floor_number: int) -> bool: 
 	if floor_scenes.has(floor_number):
