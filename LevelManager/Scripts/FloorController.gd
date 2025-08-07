@@ -6,7 +6,7 @@ class_name FloorController
 
 @export var current_floor_instance: Node = null
 
-func check_flooar (floor_number: int) -> bool: 
+func check_floor (floor_number: int) -> bool: 
 	if floor_scenes.has(floor_number):
 		return true
 	return false

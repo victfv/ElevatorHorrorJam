@@ -12,11 +12,12 @@
 [sub_resource type="Environment" id="Environment_oro32"]
 background_mode = 1
 
-[node name="Level" type="Node3D" node_paths=PackedStringArray("elevator", "floorController", "numpad")]
+[node name="Level" type="Node3D" node_paths=PackedStringArray("elevator", "floorController", "numpad", "panel")]
 script = ExtResource("1_uhyyw")
 elevator = NodePath("Elevator")
 floorController = NodePath("Floor")
 numpad = NodePath("Elevator/ElevatorPanel")
+panel = NodePath("Elevator/Panel")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_oro32")
