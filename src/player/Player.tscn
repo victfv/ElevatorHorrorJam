@@ -1,0 +1,179 @@
+[gd_scene load_steps=19 format=3 uid="uid://djvp0m4r78hop"]
+
+[ext_resource type="Script" uid="uid://bumrdo2p02hqx" path="res://src/player/player.gd" id="1_tehm3"]
+[ext_resource type="Script" uid="uid://d285xj2bu5i74" path="res://src/input/input_receiver.gd" id="2_chb7w"]
+[ext_resource type="Script" uid="uid://c68g4anq4lhoc" path="res://src/player/rotator.gd" id="2_v7rlw"]
+[ext_resource type="Shader" uid="uid://bs07k2kkb0a5i" path="res://src/shaders/view_blocker.gdshader" id="3_g641l"]
+[ext_resource type="Script" uid="uid://co3ndsrskelmt" path="res://src/player/interaction_ray.gd" id="3_v5qoq"]
+[ext_resource type="Script" uid="uid://lk5vsbkgxqv5" path="res://src/player/vis_renderer.gd" id="4_3ojaj"]
+[ext_resource type="Shader" uid="uid://db3qd544hm1lv" path="res://src/shaders/view_blocker_main.gdshader" id="4_565yv"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g641l"]
+friction = 0.0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pbc7v"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_pbc7v"]
+
+[sub_resource type="Gradient" id="Gradient_v5qoq"]
+offsets = PackedFloat32Array(0.0945946, 0.914414)
+colors = PackedColorArray(0.164063, 0.164063, 0.164063, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v5qoq"]
+seed = 19580
+fractal_octaves = 6
+fractal_lacunarity = 2.015
+fractal_gain = 0.86
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jtmj1"]
+seamless = true
+color_ramp = SubResource("Gradient_v5qoq")
+noise = SubResource("FastNoiseLite_v5qoq")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_v5qoq"]
+viewport_path = NodePath("Vis/OutviewRenderer")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_565yv"]
+viewport_path = NodePath("Vis/VisRenderer")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v7rlw"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_565yv")
+shader_parameter/shadows = SubResource("ViewportTexture_565yv")
+shader_parameter/shadow_view = SubResource("ViewportTexture_v5qoq")
+shader_parameter/noise = SubResource("NoiseTexture2D_jtmj1")
+shader_parameter/uv_scale = 0.025
+shader_parameter/noise_scroll_1 = Vector2(0.01, 0.02)
+shader_parameter/noise_scroll_2 = Vector2(0.02, 0.01)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g641l"]
+size = Vector2(128, 128)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ojaj"]
+render_priority = 0
+shader = ExtResource("3_g641l")
+
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("input_receiver", "camera")]
+collision_layer = 2
+collision_mask = 17
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_g641l")
+can_sleep = false
+lock_rotation = true
+linear_damp = 16.0
+script = ExtResource("1_tehm3")
+input_receiver = NodePath("InputReceiver")
+camera = NodePath("Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15, 0)
+cull_mask = 1023
+projection = 1
+size = 22.0
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Camera3D"]
+remote_path = NodePath("../../Vis/VisRenderer/Camera3D")
+
+[node name="RemoteTransform3D2" type="RemoteTransform3D" parent="Camera3D"]
+remote_path = NodePath("../../Vis/OutviewRenderer/Camera3D")
+
+[node name="Rotator" type="Node3D" parent="." node_paths=PackedStringArray("input_receiver")]
+script = ExtResource("2_v7rlw")
+input_receiver = NodePath("../InputReceiver")
+
+[node name="FieldOfView" type="SpotLight3D" parent="Rotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.541, 0)
+layers = 33792
+light_cull_mask = 4293952512
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_transmittance_bias = 0.0
+shadow_blur = 0.0
+shadow_caster_mask = 4293919744
+spot_range = 20.0
+spot_attenuation = -0.7
+spot_angle = 60.0
+spot_angle_attenuation = 0.435275
+
+[node name="InteractionRay" type="RayCast3D" parent="Rotator" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09984, 0)
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 25
+script = ExtResource("3_v5qoq")
+player = NodePath("../..")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Rotator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12312, 0)
+visible = false
+light_cull_mask = 4293919743
+shadow_enabled = true
+shadow_caster_mask = 4293919743
+spot_range = 12.0
+
+[node name="CollisionCapsule" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_pbc7v")
+
+[node name="CapuseVis" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+layers = 2
+mesh = SubResource("CapsuleMesh_pbc7v")
+
+[node name="InputReceiver" type="Node" parent="."]
+script = ExtResource("2_chb7w")
+auto_register = true
+
+[node name="Vis" type="Node3D" parent="."]
+
+[node name="ImmediateView" type="OmniLight3D" parent="Vis"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.69521, 0)
+visible = false
+layers = 32768
+light_cull_mask = 4293951488
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_caster_mask = 4293919744
+omni_range = 4.0
+omni_attenuation = 0.092
+
+[node name="ViewBlockerMain" type="MeshInstance3D" parent="Vis"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+visible = false
+material_override = SubResource("ShaderMaterial_v7rlw")
+mesh = SubResource("PlaneMesh_g641l")
+skeleton = NodePath("../..")
+
+[node name="ViewBlockerShadow" type="MeshInstance3D" parent="Vis"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95, 0)
+visible = false
+layers = 32768
+material_override = SubResource("ShaderMaterial_3ojaj")
+mesh = SubResource("PlaneMesh_g641l")
+skeleton = NodePath("../..")
+
+[node name="VisRenderer" type="SubViewport" parent="Vis" node_paths=PackedStringArray("enable_on_play")]
+script = ExtResource("4_3ojaj")
+enable_on_play = [NodePath("../ImmediateView"), NodePath("../ViewBlockerMain"), NodePath("../ViewBlockerShadow")]
+
+[node name="Camera3D" type="Camera3D" parent="Vis/VisRenderer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15, 0)
+cull_mask = 33792
+projection = 1
+size = 22.0
+
+[node name="OutviewRenderer" type="SubViewport" parent="Vis"]
+script = ExtResource("4_3ojaj")
+
+[node name="Camera3D" type="Camera3D" parent="Vis/OutviewRenderer"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 15, 0)
+cull_mask = 1
+projection = 1
+size = 22.0
+
+[connection signal="action" from="InputReceiver" to="Rotator/InteractionRay" method="interact"]
