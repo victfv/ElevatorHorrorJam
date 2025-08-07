@@ -21,7 +21,7 @@ InputManager="*res://src/input/InputManager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gridmap_converter/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 

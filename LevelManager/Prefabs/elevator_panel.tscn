@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c3q3f81rhemtl"]
 
-[ext_resource type="Script" uid="uid://dtdh80ojfdyym" path="res://Scripts/NumpadUI.gd" id="1_j2yuy"]
+[ext_resource type="Script" uid="uid://dtdh80ojfdyym" path="res://LevelManager/Scripts/NumpadUI.gd" id="1_j2yuy"]
 
 [node name="ElevatorPanel" type="Control" node_paths=PackedStringArray("display_label")]
 layout_mode = 3
