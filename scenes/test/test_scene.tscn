@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-[gd_scene load_steps=16 format=4 uid="uid://dev5ncjkx8irq"]
-=======
-[gd_scene load_steps=7 format=3 uid="uid://dev5ncjkx8irq"]
->>>>>>> Stashed changes
+[gd_scene load_steps=18 format=4 uid="uid://dxjtdde52u6y7"]
 
 [ext_resource type="PackedScene" uid="uid://djvp0m4r78hop" path="res://src/player/Player.tscn" id="1_wvq6k"]
 [ext_resource type="MeshLibrary" uid="uid://dm1xr2elw21od" path="res://assets/Meshlibs/floor_meshlib.tres" id="2_4b6mq"]
@@ -12,7 +8,6 @@
 [sub_resource type="Environment" id="Environment_wvq6k"]
 background_mode = 1
 
-<<<<<<< Updated upstream
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j1grx"]
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
@@ -95,7 +90,7 @@ transform_format = 1
 instance_count = 7
 mesh = SubResource("ArrayMesh_8gnpo")
 buffer = PackedFloat32Array(1, 0, 0, 11.5, 0, -1, 0, 0.5, 0, 0, -1, -7.5, 1, 0, 0, 11.5, 0, -1, 0, 0.5, 0, 0, -1, -6.5, 1, 0, 0, 11.5, 0, -1, 0, 0.5, 0, 0, -1, -5.5, 1, 0, 0, 11.5, 0, -1, 0, 0.5, 0, 0, -1, -4.5, 1, 0, 0, 10.5, 0, -1, 0, 0.5, 0, 0, -1, -4.5, 1, 0, 0, 9.5, 0, -1, 0, 0.5, 0, 0, -1, -4.5, 1, 0, 0, 8.5, 0, -1, 0, 0.5, 0, 0, -1, -4.5)
-=======
+
 [sub_resource type="GDScript" id="GDScript_lpkca"]
 script/source = "extends Label
 
@@ -103,7 +98,6 @@ func _process(delta: float) -> void:
 	text = \"FPS:%0.2f\" % Engine.get_frames_per_second()
 	text += \"\\nFrametime:%0.3f\" % delta
 "
->>>>>>> Stashed changes
 
 [node name="TestScene" type="Node3D"]
 
@@ -149,12 +143,9 @@ data = {
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="WallsGridmap" type="GridMap" parent="."]
-<<<<<<< Updated upstream
-visible = false
-=======
 process_priority = -5
 process_physics_priority = -5
->>>>>>> Stashed changes
+visible = false
 mesh_library = ExtResource("2_4b6mq")
 cell_size = Vector3(1, 1, 1)
 data = {
@@ -165,7 +156,6 @@ auto_convert = true
 visibility_layers = 1025
 metadata/_editor_floor_ = Vector3(0, 0, 0)
 
-<<<<<<< Updated upstream
 [node name="WallsGridmap Bake" type="Node3D" parent="."]
 
 [node name="@MultiMeshInstance3D@37208" type="MultiMeshInstance3D" parent="WallsGridmap Bake"]
@@ -199,12 +189,13 @@ multimesh = SubResource("MultiMesh_coxib")
 [node name="@MultiMeshInstance3D@37215" type="MultiMeshInstance3D" parent="WallsGridmap Bake"]
 layers = 1025
 multimesh = SubResource("MultiMesh_nr2x3")
-=======
+
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 23.0
 script = SubResource("GDScript_lpkca")
 
 [node name="Box" parent="." instance=ExtResource("4_omf4g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 4.25, 5.75)
->>>>>>> Stashed changes
+
+[node name="Box2" parent="." instance=ExtResource("4_omf4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.11085, 0.612756, 5.68141)

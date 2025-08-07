@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ElevatorHorrorJam"
-run/main_scene="uid://dev5ncjkx8irq"
+run/main_scene="uid://dxjtdde52u6y7"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -21,11 +21,7 @@ InputManager="*res://src/input/InputManager.gd"
 
 [editor_plugins]
 
-<<<<<<< Updated upstream
-enabled=PackedStringArray()
-=======
 enabled=PackedStringArray("res://addons/sprite_mesh/plugin.cfg")
->>>>>>> Stashed changes
 
 [input]
 
