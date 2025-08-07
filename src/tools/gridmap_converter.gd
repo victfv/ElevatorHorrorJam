@@ -31,7 +31,8 @@ func convert_gridmap() -> void:
 		outer_parent.owner = get_tree().edited_scene_root
 	for mesh : Mesh in meshes.keys():
 		var octants : Dictionary[Vector3i, Array]
-		for trs : Transform3D in meshes[mesh]:
+		for ttrs : Transform3D in meshes[mesh]:
+			var trs : Transform3D = global_transform * ttrs
 			var octant : Vector3i = Vector3i(trs.origin.x / 8.0, trs.origin.y / 8.0, trs.origin.z / 8.0)
 			if octants.has(octant):
 				octants[octant].append(trs)
@@ -51,4 +52,4 @@ func convert_gridmap() -> void:
 				instance.owner = get_tree().edited_scene_root
 			var trss : Array = octants[octant]
 			for i : int in range(trss.size()):
-				multimesh.set_instance_transform(i, trss[i])
+				multimesh.set_instance_transform(i, instance.global_transform.inverse() * trss[i])

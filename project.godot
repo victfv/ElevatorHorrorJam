@@ -21,7 +21,11 @@ InputManager="*res://src/input/InputManager.gd"
 
 [editor_plugins]
 
+<<<<<<< Updated upstream
 enabled=PackedStringArray()
+=======
+enabled=PackedStringArray("res://addons/sprite_mesh/plugin.cfg")
+>>>>>>> Stashed changes
 
 [input]
 
