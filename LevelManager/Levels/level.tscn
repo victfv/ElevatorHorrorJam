@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0dpc0cb5khit"]
+[gd_scene load_steps=11 format=3 uid="uid://d0dpc0cb5khit"]
 
 [ext_resource type="PackedScene" uid="uid://cpny4gqkatb3v" path="res://LevelManager/Levels/Elevator.tscn" id="1_s41d2"]
 [ext_resource type="Script" uid="uid://bov67eaou12oc" path="res://LevelManager/Scripts/LevelController.gd" id="1_uhyyw"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://c4hx6lwa87364" path="res://LevelManager/Levels/floor1.tscn" id="6_t80w2"]
 [ext_resource type="PackedScene" uid="uid://rxgyquvxuera" path="res://LevelManager/Levels/floor2.tscn" id="7_8a2b0"]
 [ext_resource type="PackedScene" uid="uid://djvp0m4r78hop" path="res://src/player/Player.tscn" id="7_oro32"]
+[ext_resource type="PackedScene" uid="uid://brd4excojtdo8" path="res://Ghosts/Ghost.tscn" id="9_8s2g0"]
 
 [sub_resource type="Environment" id="Environment_oro32"]
 background_mode = 1
@@ -44,3 +45,6 @@ floor_scenes = {
 current_floor_instance = NodePath("Floor2")
 
 [node name="Floor2" parent="Floor" instance=ExtResource("7_8a2b0")]
+
+[node name="Ghost" parent="Floor/Floor2" instance=ExtResource("9_8s2g0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.30275, 1.27555, 15.6826)

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://brd4excojtdo8"]
+
+[ext_resource type="Script" uid="uid://bmijyybcncsjf" path="res://Ghosts/ghost.gd" id="1_7pr0b"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_asmsn"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_asmsn"]
+
+[node name="Ghost" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 2
+floor_stop_on_slope = false
+floor_block_on_wall = false
+script = ExtResource("1_7pr0b")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_asmsn")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 4
+mesh = SubResource("CapsuleMesh_asmsn")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
