@@ -22,7 +22,6 @@ enum State {
 var current_state = State.IDLE
 
 func _ready():
-	# You can start the timer manually if Autostart is off
 	timer.start(3.0)
 
 func _on_timer_timeout():
