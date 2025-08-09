@@ -1,10 +1,13 @@
-[gd_scene load_steps=11 format=4 uid="uid://c6xnd4g6mppkd"]
+[gd_scene load_steps=12 format=4 uid="uid://c6xnd4g6mppkd"]
 
 [ext_resource type="Script" uid="uid://pq4cynbuq7qd" path="res://src/objects/object_base.gd" id="1_85pyh"]
 [ext_resource type="Texture2D" uid="uid://cie6u4b1x6kv1" path="res://assets/textures/sprites/Furniture/Desk.png" id="2_qgt3y"]
 [ext_resource type="Script" uid="uid://xdmm7egms4uv" path="res://addons/sprite_mesh/sprite_mesh_instance.gd" id="3_fcrpx"]
 [ext_resource type="Script" uid="uid://onnxwjckopnl" path="res://addons/sprite_mesh/sprite_mesh.gd" id="4_hl85v"]
 [ext_resource type="PackedScene" uid="uid://u1ddgnjhjnwq" path="res://src/interaction/interaction_area.tscn" id="5_fcrpx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fcrpx"]
+friction = 0.3
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hl85v"]
 _surfaces = [{
@@ -36,10 +39,11 @@ size = Vector3(2.245, 3, 0.765)
 
 [node name="Desk" type="RigidBody3D"]
 collision_layer = 16
-collision_mask = 3
+collision_mask = 19
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 mass = 20.0
+physics_material_override = SubResource("PhysicsMaterial_fcrpx")
 script = ExtResource("1_85pyh")
 
 [node name="SpriteMeshInstance" type="MeshInstance3D" parent="."]

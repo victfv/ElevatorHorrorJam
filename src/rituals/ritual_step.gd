@@ -16,6 +16,10 @@ func _ready() -> void:
 func already_completed() -> void: #Called when ritual is completed already
 	completed = true
 
+func undo() -> void:
+	if ritual:
+		ritual.undo_step(step)
+
 func complete() -> void:
 	if ritual:
 		ritual.complete_step(step)

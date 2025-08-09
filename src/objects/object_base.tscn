@@ -1,9 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://clw0551ew3qky"]
+[gd_scene load_steps=3 format=3 uid="uid://clw0551ew3qky"]
 
 [ext_resource type="Script" uid="uid://pq4cynbuq7qd" path="res://src/objects/object_base.gd" id="1_v3a5n"]
 
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_v3a5n"]
+friction = 0.3
+
 [node name="ObjectBase" type="RigidBody3D"]
 collision_layer = 16
+collision_mask = 19
 axis_lock_angular_x = true
 axis_lock_angular_z = true
+physics_material_override = SubResource("PhysicsMaterial_v3a5n")
 script = ExtResource("1_v3a5n")

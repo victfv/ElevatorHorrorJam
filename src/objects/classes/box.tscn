@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://u1ddgnjhjnwq" path="res://src/interaction/interaction_area.tscn" id="2_y87y7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_p5l3o"]
+friction = 0.3
 
 [sub_resource type="BoxMesh" id="BoxMesh_p5l3o"]
 

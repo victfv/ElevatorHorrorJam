@@ -19,6 +19,10 @@ func complete_step(step : String) -> void:
 	complete = true
 	ritual_completed.emit()
 
+func undo_step(step : String) -> void:
+	if steps.has(step):
+		steps[step] = false
+
 func is_step_completed(step : String) -> bool:
 	return steps.get(step, false)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://djvp0m4r78hop"]
+[gd_scene load_steps=39 format=4 uid="uid://djvp0m4r78hop"]
 
 [ext_resource type="Script" uid="uid://bumrdo2p02hqx" path="res://src/player/player.gd" id="1_tehm3"]
 [ext_resource type="Script" uid="uid://d285xj2bu5i74" path="res://src/input/input_receiver.gd" id="2_chb7w"]
@@ -106,6 +106,8 @@ script = ExtResource("6_es4xk")
 meshes = Array[ArrayMesh]([SubResource("ArrayMesh_es4xk")])
 material = SubResource("StandardMaterial3D_g183x")
 
+[sub_resource type="SphereMesh" id="SphereMesh_wvcio"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_pbc7v"]
 radius = 0.347596
 
@@ -158,7 +160,7 @@ axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-mass = 20.0
+mass = 10.0
 physics_material_override = SubResource("PhysicsMaterial_g641l")
 can_sleep = false
 lock_rotation = true
@@ -193,14 +195,6 @@ script = ExtResource("2_v7rlw")
 player = NodePath("..")
 input_receiver = NodePath("../InputReceiver")
 head = NodePath("HD")
-
-[node name="InteractionRay" type="RayCast3D" parent="Rotator" node_paths=PackedStringArray("player")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09984, 0)
-target_position = Vector3(0, 0, -2.5)
-collision_mask = 25
-collide_with_areas = true
-script = ExtResource("3_v5qoq")
-player = NodePath("../..")
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Rotator"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12312, 0)
@@ -279,10 +273,21 @@ spot_attenuation = -0.7
 spot_angle = 60.0
 spot_angle_attenuation = 0.435275
 
+[node name="InteractionRay" type="RayCast3D" parent="Rotator/HD" node_paths=PackedStringArray("player")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09984, 0)
+target_position = Vector3(0, 0, -2.5)
+collision_mask = 25
+collide_with_areas = true
+script = ExtResource("3_v5qoq")
+player = NodePath("../../..")
+
 [node name="Grabber" type="Generic6DOFJoint3D" parent="Rotator" node_paths=PackedStringArray("player", "rotator")]
 script = ExtResource("10_wvcio")
 player = NodePath("../..")
 rotator = NodePath("..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Rotator/Grabber"]
+mesh = SubResource("SphereMesh_wvcio")
 
 [node name="CollisionCapsule" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -348,4 +353,4 @@ projection = 1
 size = 16.0
 far = 30.0
 
-[connection signal="action" from="InputReceiver" to="Rotator/InteractionRay" method="interact"]
+[connection signal="action" from="InputReceiver" to="Rotator/HD/InteractionRay" method="interact"]

@@ -6,7 +6,7 @@ class_name Player
 @export var camera : Camera3D
 @export var grabber: PlayerGrabber
 
-var acceleration : float = 2400.0
+var acceleration : float = 800.0
 var damping : float = 16.0
 
 var frozen : bool = false

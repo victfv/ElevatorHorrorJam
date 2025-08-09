@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dv3uhdopyyfkj"
-path.bptc="res://.godot/imported/Couch.png-7041220d64bbb8daeaa584264c59d4cc.bptc.ctex"
+uid="uid://bd85ybfvehr76"
+path.s3tc="res://.godot/imported/Wardrobe.png-62f30f0edf653efd458333f780e6b4c4.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,13 +11,13 @@ metadata={
 
 [deps]
 
-source_file="res://assets/textures/sprites/Furniture/Couch.png"
-dest_files=["res://.godot/imported/Couch.png-7041220d64bbb8daeaa584264c59d4cc.bptc.ctex"]
+source_file="res://assets/textures/sprites/Furniture/Wardrobe.png"
+dest_files=["res://.godot/imported/Wardrobe.png-62f30f0edf653efd458333f780e6b4c4.s3tc.ctex"]
 
 [params]
 
 compress/mode=2
-compress/high_quality=true
+compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0

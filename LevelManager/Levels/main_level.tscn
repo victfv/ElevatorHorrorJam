@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=3 uid="uid://dij36jou3ckw"]
+
+[ext_resource type="Script" uid="uid://bov67eaou12oc" path="res://LevelManager/Scripts/LevelController.gd" id="1_rulji"]
+[ext_resource type="PackedScene" uid="uid://djvp0m4r78hop" path="res://src/player/Player.tscn" id="2_h5ef7"]
+[ext_resource type="PackedScene" uid="uid://cpny4gqkatb3v" path="res://LevelManager/Levels/Elevator.tscn" id="3_qrwvi"]
+[ext_resource type="PackedScene" uid="uid://c3q3f81rhemtl" path="res://LevelManager/Prefabs/elevator_panel.tscn" id="4_jr2hk"]
+[ext_resource type="PackedScene" uid="uid://yjn66y4wpl2l" path="res://LevelManager/Prefabs/panel.tscn" id="5_my05v"]
+[ext_resource type="Script" uid="uid://dff465rh567m7" path="res://LevelManager/Scripts/FloorController.gd" id="6_61nwx"]
+[ext_resource type="PackedScene" uid="uid://c4hx6lwa87364" path="res://LevelManager/Levels/floor1.tscn" id="7_w6pu5"]
+[ext_resource type="PackedScene" uid="uid://rxgyquvxuera" path="res://LevelManager/Levels/floor2.tscn" id="8_6nuvh"]
+
+[sub_resource type="Environment" id="Environment_oro32"]
+background_mode = 1
+
+[node name="Level" type="Node3D" node_paths=PackedStringArray("elevator", "floorController", "numpad", "panel")]
+script = ExtResource("1_rulji")
+elevator = NodePath("Elevator")
+floorController = NodePath("Floor")
+numpad = NodePath("Elevator/ElevatorPanel")
+panel = NodePath("Elevator/Panel")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_oro32")
+
+[node name="Player" parent="." instance=ExtResource("2_h5ef7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33154, 0.299378, 2.47277)
+
+[node name="Elevator" parent="." instance=ExtResource("3_qrwvi")]
+
+[node name="ElevatorPanel" parent="Elevator" node_paths=PackedStringArray("levelController") instance=ExtResource("4_jr2hk")]
+visible = false
+levelController = NodePath("../..")
+
+[node name="Panel" parent="Elevator" node_paths=PackedStringArray("panelUI") instance=ExtResource("5_my05v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62352, 2.80944)
+panelUI = NodePath("../ElevatorPanel")
+
+[node name="Floor" type="Node3D" parent="." node_paths=PackedStringArray("current_floor_instance")]
+script = ExtResource("6_61nwx")
+floor_scenes = {
+11: ExtResource("7_w6pu5"),
+26: ExtResource("8_6nuvh")
+}
+current_floor_instance = NodePath("")
