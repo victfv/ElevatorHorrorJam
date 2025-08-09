@@ -196,9 +196,15 @@ player = NodePath("..")
 input_receiver = NodePath("../InputReceiver")
 head = NodePath("HD")
 
-[node name="SpotLight3D" type="SpotLight3D" parent="Rotator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12312, 0)
-visible = false
+[node name="OmniLight3D" type="SpotLight3D" parent="Rotator"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.58024, 0)
+layers = 1023
+spot_range = 6.65135
+spot_angle = 50.44
+spot_angle_attenuation = 6.9644
+
+[node name="Flashlight" type="SpotLight3D" parent="Rotator"]
+transform = Transform3D(1, 0, 0, 0, 0.963584, 0.267407, 0, -0.267407, 0.963584, 0, 2.68315, 0)
 light_cull_mask = 4293919743
 shadow_enabled = true
 shadow_caster_mask = 4293919743
@@ -287,6 +293,7 @@ player = NodePath("../..")
 rotator = NodePath("..")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Rotator/Grabber"]
+visible = false
 mesh = SubResource("SphereMesh_wvcio")
 
 [node name="CollisionCapsule" type="CollisionShape3D" parent="."]

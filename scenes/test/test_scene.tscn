@@ -109,7 +109,7 @@ size = Vector3(50, 1, 50)
 [node name="TestScene" type="Node3D"]
 
 [node name="Player" parent="." instance=ExtResource("1_wvq6k")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 6.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.81189, 0, 6.1662)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wvq6k")

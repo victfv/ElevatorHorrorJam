@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dij36jou3ckw"]
+[gd_scene load_steps=11 format=3 uid="uid://dij36jou3ckw"]
 
 [ext_resource type="Script" uid="uid://bov67eaou12oc" path="res://LevelManager/Scripts/LevelController.gd" id="1_rulji"]
 [ext_resource type="PackedScene" uid="uid://djvp0m4r78hop" path="res://src/player/Player.tscn" id="2_h5ef7"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://dff465rh567m7" path="res://LevelManager/Scripts/FloorController.gd" id="6_61nwx"]
 [ext_resource type="PackedScene" uid="uid://c4hx6lwa87364" path="res://LevelManager/Levels/floor1.tscn" id="7_w6pu5"]
 [ext_resource type="PackedScene" uid="uid://rxgyquvxuera" path="res://LevelManager/Levels/floor2.tscn" id="8_6nuvh"]
+[ext_resource type="PackedScene" uid="uid://chwrdgx26mx0t" path="res://LevelManager/Floors/floor_444.tscn" id="9_rulji"]
 
 [sub_resource type="Environment" id="Environment_oro32"]
 background_mode = 1
@@ -23,7 +24,7 @@ panel = NodePath("Elevator/Panel")
 environment = SubResource("Environment_oro32")
 
 [node name="Player" parent="." instance=ExtResource("2_h5ef7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.33154, 0.299378, 2.47277)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.332, 0, 2.473)
 
 [node name="Elevator" parent="." instance=ExtResource("3_qrwvi")]
 
@@ -35,10 +36,11 @@ levelController = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62352, 2.80944)
 panelUI = NodePath("../ElevatorPanel")
 
-[node name="Floor" type="Node3D" parent="." node_paths=PackedStringArray("current_floor_instance")]
+[node name="Floor" type="Node3D" parent="."]
 script = ExtResource("6_61nwx")
 floor_scenes = {
 11: ExtResource("7_w6pu5"),
 26: ExtResource("8_6nuvh")
 }
-current_floor_instance = NodePath("")
+
+[node name="Floor444" parent="Floor" instance=ExtResource("9_rulji")]

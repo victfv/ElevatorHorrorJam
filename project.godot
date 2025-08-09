@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ElevatorHorrorJam"
-run/main_scene="uid://dxjtdde52u6y7"
+run/main_scene="uid://dij36jou3ckw"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
