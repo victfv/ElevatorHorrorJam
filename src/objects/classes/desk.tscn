@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=4 uid="uid://c6xnd4g6mppkd"]
+
+[ext_resource type="Script" uid="uid://pq4cynbuq7qd" path="res://src/objects/object_base.gd" id="1_85pyh"]
+[ext_resource type="Texture2D" uid="uid://cie6u4b1x6kv1" path="res://assets/textures/sprites/Furniture/Desk.png" id="2_qgt3y"]
+[ext_resource type="Script" uid="uid://xdmm7egms4uv" path="res://addons/sprite_mesh/sprite_mesh_instance.gd" id="3_fcrpx"]
+[ext_resource type="Script" uid="uid://onnxwjckopnl" path="res://addons/sprite_mesh/sprite_mesh.gd" id="4_hl85v"]
+[ext_resource type="PackedScene" uid="uid://u1ddgnjhjnwq" path="res://src/interaction/interaction_area.tscn" id="5_fcrpx"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hl85v"]
+_surfaces = [{
+"aabb": AABB(-1.15, -0.45, -0.25, 2.3, 0.75, 0.5),
+"attribute_data": PackedByteArray("AAAQPgAA2D4AAFw/AADYPgAAXD8AACQ/AAAQPgAA2D4AAFw/AAAkPwAAED4AACQ/AAAgPgAA1D4AAFg/AADUPgAAWD8AANQ+AAAgPgAA1D4AAFg/AADUPgAAID4AANQ+AABcPwAA2D4AABA+AADYPgAAED4AACQ/AABcPwAAJD8AAFg/AADUPgAAID4AANQ+AAAgPgAA1D4AAFg/AADUPgAAGD4AANg+AAAYPgAA2D4AABg+AAAkPwAAGD4AACQ/AAAoPgAA1D4AACg+AADUPgAAKD4AANQ+AAAoPgAA1D4AAFY/AADUPgAAVj8AANQ+AABWPwAA1D4AAFY/AADUPgAAWj8AANg+AABaPwAA2D4AAFo/AAAkPwAAWj8AACQ/AAAgPgAA1D4AAFg/AADUPgAAWD8AANQ+AAAgPgAA1D4AABg+AADcPgAAGD4AANw+AAAYPgAA3D4AABg+AADcPgAAWj8AANw+AABaPwAA3D4AAFo/AADcPgAAWj8AANw+AAAQPgAAIj8AAFw/AAAiPwAAXD8AACI/AAAQPgAAIj8="),
+"format": 34359742487,
+"index_count": 72,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 52,
+"vertex_data": PackedByteArray("MzOTvwAAgD4AAIA+MzOTPwAAgD4AAIA+MzOTP2dm5r4AAIA+MzOTvwAAgD4AAIA+MzOTP2dm5r4AAIA+MzOTv2dm5r4AAIA+zcyMv5qZmT4AAIA+zcyMP5qZmT4AAIA+zcyMPwAAgD4AAIA+zcyMv5qZmT4AAIA+zcyMPwAAgD4AAIA+zcyMvwAAgD4AAIA+MzOTPwAAgD4AAIC+MzOTvwAAgD4AAIC+MzOTv2dm5r4AAIC+MzOTP2dm5r4AAIC+zcyMP5qZmT4AAIC+zcyMv5qZmT4AAIC+zcyMvwAAgD4AAIC+zcyMPwAAgD4AAIC+MzOTvwAAgD4AAIC+MzOTvwAAgD4AAIA+MzOTv2dm5r4AAIA+MzOTv2dm5r4AAIC+zcyMv5qZmT4AAIC+zcyMv5qZmT4AAIA+zcyMvwAAgD4AAIA+zcyMvwAAgD4AAIC+zcyMP5qZmT4AAIA+zcyMP5qZmT4AAIC+zcyMPwAAgD4AAIC+zcyMPwAAgD4AAIA+MzOTPwAAgD4AAIA+MzOTPwAAgD4AAIC+MzOTP2dm5r4AAIC+MzOTP2dm5r4AAIA+zcyMv5qZmT4AAIC+zcyMP5qZmT4AAIC+zcyMP5qZmT4AAIA+zcyMv5qZmT4AAIA+MzOTvwAAgD4AAIC+zcyMvwAAgD4AAIC+zcyMvwAAgD4AAIA+MzOTvwAAgD4AAIA+zcyMPwAAgD4AAIC+MzOTPwAAgD4AAIC+MzOTPwAAgD4AAIA+zcyMPwAAgD4AAIA+MzOTv2dm5r4AAIA+MzOTP2dm5r4AAIA+MzOTP2dm5r4AAIC+MzOTv2dm5r4AAIC+/3//f////7//f/9/////v/9//3////+//3//f////7//f/9/////v/9//3////+//3//f////z//f/9/////P/9//3////8//3//f////z//f/9/////P/9//3////8//////////z//////////P/////////8//////////z//////////v/////////+//////////7//////////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+/AAD/f////78AAP9/////vwAA/3////+/AAD/f////7////9/////v////3////+/////f////7////9/////v////3////+/////f////7////9/////v////3////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//3///////7//f///////v/9///////+//38AAP///7//fwAA////v/9/AAD///+//38AAP///78=")
+}]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tpeqf"]
+albedo_texture = ExtResource("2_qgt3y")
+texture_filter = 0
+
+[sub_resource type="Resource" id="Resource_7ta8i"]
+script = ExtResource("4_hl85v")
+meshes = Array[ArrayMesh]([SubResource("ArrayMesh_hl85v")])
+material = SubResource("StandardMaterial3D_tpeqf")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fcrpx"]
+points = PackedVector3Array(1.09979, 0.3, 0.25, 1.15, 0.249931, 0.25, 1.09979, 0.3, -0.25, -1.10002, 0.3, 0.25, 1.15, 0.249931, -0.25, 1.15, -0.45, 0.25, -1.10002, 0.3, -0.25, -1.15, 0.249931, 0.25, 1.15, -0.45, -0.25, -1.15, -0.45, 0.25, -1.15, 0.249931, -0.25, -1.15, -0.45, -0.25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mc4yu"]
+size = Vector3(2.245, 3, 0.765)
+
+[node name="Desk" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 3
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+mass = 20.0
+script = ExtResource("1_85pyh")
+
+[node name="SpriteMeshInstance" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+layers = 4
+mesh = SubResource("ArrayMesh_hl85v")
+surface_material_override/0 = SubResource("StandardMaterial3D_tpeqf")
+script = ExtResource("3_fcrpx")
+texture = ExtResource("2_qgt3y")
+depth = 10.0
+pixel_size = 0.05
+generated_sprite_mesh = SubResource("Resource_7ta8i")
+metadata/_custom_type_script = "uid://xdmm7egms4uv"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_fcrpx")
+
+[node name="InteractionArea" parent="." node_paths=PackedStringArray("call") instance=ExtResource("5_fcrpx")]
+call = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0.084585)
+shape = SubResource("BoxShape3D_mc4yu")

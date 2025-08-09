@@ -6,5 +6,4 @@
 collision_layer = 16
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-lock_rotation = true
 script = ExtResource("1_v3a5n")

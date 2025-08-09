@@ -279,9 +279,10 @@ spot_attenuation = -0.7
 spot_angle = 60.0
 spot_angle_attenuation = 0.435275
 
-[node name="Grabber" type="Generic6DOFJoint3D" parent="Rotator" node_paths=PackedStringArray("player")]
+[node name="Grabber" type="Generic6DOFJoint3D" parent="Rotator" node_paths=PackedStringArray("player", "rotator")]
 script = ExtResource("10_wvcio")
 player = NodePath("../..")
+rotator = NodePath("..")
 
 [node name="CollisionCapsule" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

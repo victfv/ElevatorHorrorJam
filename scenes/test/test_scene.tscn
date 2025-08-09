@@ -1,9 +1,11 @@
-[gd_scene load_steps=18 format=4 uid="uid://dxjtdde52u6y7"]
+[gd_scene load_steps=20 format=4 uid="uid://dxjtdde52u6y7"]
 
 [ext_resource type="PackedScene" uid="uid://djvp0m4r78hop" path="res://src/player/Player.tscn" id="1_wvq6k"]
 [ext_resource type="MeshLibrary" uid="uid://dm1xr2elw21od" path="res://assets/Meshlibs/floor_meshlib.tres" id="2_4b6mq"]
 [ext_resource type="Script" uid="uid://thqsm0npqqo" path="res://src/tools/gridmap_converter.gd" id="3_lpkca"]
 [ext_resource type="PackedScene" uid="uid://c2u1po6oqsvhm" path="res://src/objects/classes/box.tscn" id="4_omf4g"]
+[ext_resource type="PackedScene" uid="uid://c6xnd4g6mppkd" path="res://src/objects/classes/desk.tscn" id="5_cntqm"]
+[ext_resource type="PackedScene" uid="uid://db2vv6c4istwb" path="res://src/objects/classes/couch.tscn" id="6_0eyv0"]
 
 [sub_resource type="Environment" id="Environment_wvq6k"]
 background_mode = 1
@@ -197,5 +199,8 @@ script = SubResource("GDScript_lpkca")
 
 [node name="Box" parent="." instance=ExtResource("4_omf4g")]
 
-[node name="Box2" parent="." instance=ExtResource("4_omf4g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.11085, 0.612756, 5.68141)
+[node name="Desk" parent="." instance=ExtResource("5_cntqm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.678, 0.620411, 5.80433)
+
+[node name="ObjectBase" parent="." instance=ExtResource("6_0eyv0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.67053, 1.6708, -2.38419e-07)
