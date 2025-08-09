@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 InputManager="*res://src/input/InputManager.gd"
+RitualLibrary="*res://src/Singletons/RitualLibrary.gd"
 
 [editor_plugins]
 
