@@ -8,6 +8,7 @@ var udlr : Vector2
 var l_udlr : Vector2
 
 signal action(state : bool)
+signal change_tool(dir : int)
 
 func _ready() -> void:
 	if auto_register:

@@ -22,7 +22,7 @@ func _on_button_pressed(button_text: String):
 			_on_digit_pressed(button_text)
 
 func _on_digit_pressed(digit: String):
-	if current_input.length() < 2:
+	if current_input.length() < 3:
 		current_input += digit
 		display_label.text = current_input
 

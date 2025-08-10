@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=4 uid="uid://bprxwfg44j3tj"]
+[gd_scene load_steps=11 format=4 uid="uid://bprxwfg44j3tj"]
 
 [ext_resource type="Script" uid="uid://pq4cynbuq7qd" path="res://src/objects/object_base.gd" id="1_b7pin"]
 [ext_resource type="Texture2D" uid="uid://bd85ybfvehr76" path="res://assets/textures/sprites/Furniture/Wardrobe.png" id="2_j0fsb"]
 [ext_resource type="Script" uid="uid://xdmm7egms4uv" path="res://addons/sprite_mesh/sprite_mesh_instance.gd" id="3_sn1ht"]
 [ext_resource type="Script" uid="uid://onnxwjckopnl" path="res://addons/sprite_mesh/sprite_mesh.gd" id="4_a1boa"]
+[ext_resource type="PackedScene" uid="uid://u1ddgnjhjnwq" path="res://src/interaction/interaction_area.tscn" id="5_sn1ht"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gkp1w"]
 friction = 0.3
@@ -55,5 +56,13 @@ generated_sprite_mesh = SubResource("Resource_a1boa")
 metadata/_custom_type_script = "uid://xdmm7egms4uv"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_f5dh0")
+
+[node name="InteractionArea" parent="." node_paths=PackedStringArray("call") instance=ExtResource("5_sn1ht")]
+description = "Wardrobe"
+call = NodePath("..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_f5dh0")

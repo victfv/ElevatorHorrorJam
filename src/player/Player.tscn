@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=4 uid="uid://djvp0m4r78hop"]
+[gd_scene load_steps=45 format=4 uid="uid://djvp0m4r78hop"]
 
 [ext_resource type="Script" uid="uid://bumrdo2p02hqx" path="res://src/player/player.gd" id="1_tehm3"]
 [ext_resource type="Script" uid="uid://d285xj2bu5i74" path="res://src/input/input_receiver.gd" id="2_chb7w"]
@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://binqvn1426lai" path="res://assets/textures/sprites/Player/ToolBox.png" id="7_g183x"]
 [ext_resource type="Texture2D" uid="uid://c0n4cmltlkvem" path="res://assets/textures/sprites/Player/Arm.png" id="8_ojh85"]
 [ext_resource type="Script" uid="uid://crkm2g2vxc3pm" path="res://src/player/grabber.gd" id="10_wvcio"]
+[ext_resource type="Script" uid="uid://b8mq5h68ac50y" path="res://src/player/vis.gd" id="12_bmp5p"]
+[ext_resource type="PackedScene" uid="uid://dcarw2ul6l8my" path="res://src/UI/hud.tscn" id="15_lnh6v"]
+[ext_resource type="Script" uid="uid://cmxt72d7muf7l" path="res://src/player/emf_detector.gd" id="17_1wxdb"]
+[ext_resource type="Script" uid="uid://c843f5tk3regm" path="res://src/player/tool_manager.gd" id="18_tm4vc"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g641l"]
 friction = 0.0
@@ -153,6 +157,16 @@ size = Vector2(128, 128)
 render_priority = 0
 shader = ExtResource("3_g641l")
 
+[sub_resource type="GDScript" id="GDScript_wvcio"]
+script/source = "extends Label
+
+func _process(delta: float) -> void:
+	text = \"FPS:%0.2f\" % Engine.get_frames_per_second()
+	text += \"\\nFrametime:%0.3f\" % delta
+"
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_bmp5p"]
+
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("input_receiver", "camera", "grabber")]
 collision_layer = 2
 collision_mask = 17
@@ -196,22 +210,24 @@ player = NodePath("..")
 input_receiver = NodePath("../InputReceiver")
 head = NodePath("HD")
 
-[node name="OmniLight3D" type="SpotLight3D" parent="Rotator"]
+[node name="TopLight" type="SpotLight3D" parent="Rotator"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.58024, 0)
 layers = 1023
-spot_range = 6.65135
-spot_angle = 50.44
+light_energy = 0.25
+spot_range = 8.93944
+spot_angle = 51.1176
 spot_angle_attenuation = 6.9644
 
 [node name="Flashlight" type="SpotLight3D" parent="Rotator"]
-transform = Transform3D(1, 0, 0, 0, 0.963584, 0.267407, 0, -0.267407, 0.963584, 0, 2.68315, 0)
+transform = Transform3D(1, 0, 0, 0, 0.963584, 0.267407, 0, -0.267407, 0.963584, 0, 2.683, -0.068)
+layers = 4
 light_cull_mask = 4293919743
 shadow_enabled = true
 shadow_caster_mask = 4293919743
 spot_range = 12.0
 
 [node name="Body" type="MeshInstance3D" parent="Rotator"]
-transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 0.660018, 0)
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 0.430528, 0)
 mesh = SubResource("ArrayMesh_g183x")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ojh85")
@@ -223,7 +239,7 @@ generated_sprite_mesh = SubResource("Resource_wvcio")
 metadata/_custom_type_script = "uid://xdmm7egms4uv"
 
 [node name="ToolBox" type="MeshInstance3D" parent="Rotator"]
-transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 0.660018, 0)
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 0.518285, 0)
 mesh = SubResource("ArrayMesh_ojh85")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_wvcio")
@@ -236,8 +252,7 @@ generated_sprite_mesh = SubResource("Resource_lnh6v")
 metadata/_custom_type_script = "uid://xdmm7egms4uv"
 
 [node name="Arm" type="MeshInstance3D" parent="Rotator"]
-transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 1.38389, 0)
-visible = false
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 1.1544, 0)
 mesh = SubResource("ArrayMesh_wvcio")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_lnh6v")
@@ -251,21 +266,8 @@ metadata/_custom_type_script = "uid://xdmm7egms4uv"
 
 [node name="HD" type="Node3D" parent="Rotator"]
 
-[node name="Head" type="MeshInstance3D" parent="Rotator/HD"]
-transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 1.80431, 0)
-mesh = SubResource("ArrayMesh_es4xk")
-skeleton = NodePath("../../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_g183x")
-script = ExtResource("5_bj1ma")
-texture = ExtResource("4_jtmj1")
-depth = 20.0
-pixel_size = 0.02
-region_rect = Rect2i(0, 0, 1, 1)
-generated_sprite_mesh = SubResource("Resource_ojh85")
-metadata/_custom_type_script = "uid://xdmm7egms4uv"
-
-[node name="FieldOfView" type="SpotLight3D" parent="Rotator/HD/Head"]
-transform = Transform3D(-1, -2.5411e-21, -8.74228e-08, 8.74228e-08, -4.37114e-08, -1, -3.82137e-15, -1, 4.37114e-08, -1.87199e-21, -3.22016e-08, -0.736687)
+[node name="FieldOfView" type="SpotLight3D" parent="Rotator/HD"]
+transform = Transform3D(1, 2.5411e-21, 1.67037e-22, -2.5411e-21, 1, 0, -1.67037e-22, -4.24593e-43, 1, 1.48231e-21, 2.541, -1.77636e-14)
 layers = 33792
 light_cull_mask = 4293952512
 shadow_enabled = true
@@ -279,10 +281,23 @@ spot_attenuation = -0.7
 spot_angle = 60.0
 spot_angle_attenuation = 0.435275
 
+[node name="Head" type="MeshInstance3D" parent="Rotator/HD"]
+transform = Transform3D(-1, 8.74228e-08, -3.82137e-15, 0, -4.37114e-08, -1, -8.74228e-08, -1, 4.37114e-08, 0, 1.57482, 0)
+mesh = SubResource("ArrayMesh_es4xk")
+skeleton = NodePath("../../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_g183x")
+script = ExtResource("5_bj1ma")
+texture = ExtResource("4_jtmj1")
+depth = 20.0
+pixel_size = 0.02
+region_rect = Rect2i(0, 0, 1, 1)
+generated_sprite_mesh = SubResource("Resource_ojh85")
+metadata/_custom_type_script = "uid://xdmm7egms4uv"
+
 [node name="InteractionRay" type="RayCast3D" parent="Rotator/HD" node_paths=PackedStringArray("player")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.09984, 0)
 target_position = Vector3(0, 0, -2.5)
-collision_mask = 25
+collision_mask = 9
 collide_with_areas = true
 script = ExtResource("3_v5qoq")
 player = NodePath("../../..")
@@ -310,7 +325,12 @@ mesh = SubResource("CapsuleMesh_pbc7v")
 script = ExtResource("2_chb7w")
 auto_register = true
 
-[node name="Vis" type="Node3D" parent="."]
+[node name="Vis" type="Node3D" parent="." node_paths=PackedStringArray("vis_renderer", "outview_renderer", "view_blocker_main", "view_blocker_shadow")]
+script = ExtResource("12_bmp5p")
+vis_renderer = NodePath("VisRenderer")
+outview_renderer = NodePath("OutviewRenderer")
+view_blocker_main = NodePath("ViewBlockerMain")
+view_blocker_shadow = NodePath("ViewBlockerShadow")
 
 [node name="ImmediateView" type="OmniLight3D" parent="Vis"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.88611, 0)
@@ -360,4 +380,35 @@ projection = 1
 size = 16.0
 far = 30.0
 
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+script = SubResource("GDScript_wvcio")
+
+[node name="HUD" parent="." instance=ExtResource("15_lnh6v")]
+
+[node name="InteractionDescription" parent="HUD" index="1" node_paths=PackedStringArray("interaction", "camera")]
+interaction = NodePath("../../Rotator/HD/InteractionRay")
+camera = NodePath("../../Camera3D")
+
+[node name="EMFDetector" type="Area3D" parent="." node_paths=PackedStringArray("emf_ui", "paper")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.01797, 0)
+collision_layer = 128
+collision_mask = 0
+monitoring = false
+script = ExtResource("17_1wxdb")
+emf_ui = NodePath("../HUD/VBoxContainer/HBoxContainer/Panel2/ToolTabs/EMF")
+paper = NodePath("../HUD/VBoxContainer/HBoxContainer/Panel2/ToolTabs/Paper")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EMFDetector"]
+shape = SubResource("SphereShape3D_bmp5p")
+
+[node name="ToolManager" type="Node" parent="." node_paths=PackedStringArray("tool_tabs", "flashlight")]
+script = ExtResource("18_tm4vc")
+tool_tabs = NodePath("../HUD/VBoxContainer/HBoxContainer/Panel2/ToolTabs")
+flashlight = NodePath("../Rotator/Flashlight")
+
 [connection signal="action" from="InputReceiver" to="Rotator/HD/InteractionRay" method="interact"]
+[connection signal="change_tool" from="InputReceiver" to="ToolManager" method="_on_input_receiver_change_tool"]
+
+[editable path="HUD"]

@@ -14,6 +14,11 @@ func _physics_process(delta: float) -> void:
 			receiver.action.emit(true)
 		elif Input.is_action_just_released("ACTION"):
 			receiver.action.emit(false)
+		
+		if Input.is_action_just_pressed("TOOL_UP"):
+			receiver.change_tool.emit(1)
+		if Input.is_action_just_pressed("TOOL_DOWN"):
+			receiver.change_tool.emit(-1)
 
 func register_receiver(rec : InputReceiver) -> void:
 	if rec in input_queue:

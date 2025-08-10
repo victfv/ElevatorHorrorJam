@@ -2,7 +2,7 @@ extends Node3D
 class_name FloorController
 # Folder where your floor scenes are located
 @export var floor_scene_path_base: String = "res://Floors/Floor"
-@export var floor_scenes: Dictionary  # key: int, value: PackedScene
+@export var floor_scenes: Dictionary[int, PackedScene]  # key: int, value: PackedScene
 
 @export var current_floor_instance: Node = null
 

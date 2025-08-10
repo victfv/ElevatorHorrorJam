@@ -1,0 +1,268 @@
+[gd_scene load_steps=18 format=3 uid="uid://dcarw2ul6l8my"]
+
+[ext_resource type="Texture2D" uid="uid://dxerdhhqkkq4s" path="res://assets/textures/sprites/UI/compass.png" id="1_aia3k"]
+[ext_resource type="Script" uid="uid://dj6tk84cd2jh1" path="res://src/UI/compass.gd" id="2_f6bxe"]
+[ext_resource type="Texture2D" uid="uid://gj1xwuohmpv8" path="res://assets/textures/sprites/Tools/efm.png" id="3_3l0hb"]
+[ext_resource type="Script" uid="uid://cp7j3ihjahjkf" path="res://src/UI/interaction_description.gd" id="3_4mwe0"]
+[ext_resource type="Script" uid="uid://5ny6ikg3l7nk" path="res://src/UI/tool_tabs.gd" id="3_i1k58"]
+[ext_resource type="Script" uid="uid://cym2qkyog41uj" path="res://src/UI/emf.gd" id="3_mirhy"]
+[ext_resource type="Script" uid="uid://d25kb7h2rqb10" path="res://src/UI/paper.gd" id="4_o1rxc"]
+[ext_resource type="Texture2D" uid="uid://cdjopymn01ids" path="res://assets/textures/sprites/Tools/paperr.png" id="4_p5eb6"]
+[ext_resource type="Texture2D" uid="uid://dwpwyvscocbuu" path="res://assets/textures/sprites/Tools/paper_fire.png" id="6_mirhy"]
+[ext_resource type="Texture2D" uid="uid://crla6efw2fxlg" path="res://assets/textures/sprites/Tools/paper_fire_2.png" id="7_w6lal"]
+[ext_resource type="Texture2D" uid="uid://b8n08piobismx" path="res://assets/textures/sprites/Tools/flashlight.png" id="9_w6lal"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1rpid"]
+bg_color = Color(0.293186, 0.140991, 0.515625, 1)
+
+[sub_resource type="Gradient" id="Gradient_3l0hb"]
+colors = PackedColorArray(0.171875, 1, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p5eb6"]
+gradient = SubResource("Gradient_3l0hb")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_aqumb"]
+texture = SubResource("GradientTexture2D_p5eb6")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c6fdt"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_i1k58"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 80.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="Panel" type="Panel" parent="VBoxContainer/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(229, 130)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="VBoxContainer/HBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 5.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_1rpid")
+value = 50.0
+fill_mode = 3
+show_percentage = false
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Panel/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Sanity"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 5.0
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Compass" type="TextureRect" parent="VBoxContainer/HBoxContainer/Panel/HBoxContainer/VBoxContainer2/Control" node_paths=PackedStringArray("parent")]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+offset_left = 56.0
+offset_top = 19.0
+offset_right = 120.0
+offset_bottom = 83.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(32, 32)
+size_flags_vertical = 3
+texture = ExtResource("1_aia3k")
+expand_mode = 2
+stretch_mode = 5
+script = ExtResource("2_f6bxe")
+parent = NodePath("..")
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Panel/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Elevator"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 60.0
+
+[node name="Panel2" type="Panel" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 20.0
+
+[node name="ToolTabs" type="TabContainer" parent="VBoxContainer/HBoxContainer/Panel2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+current_tab = 2
+tabs_visible = false
+script = ExtResource("3_i1k58")
+
+[node name="EMF" type="Control" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs"]
+visible = false
+layout_mode = 2
+script = ExtResource("3_mirhy")
+metadata/_tab_index = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs/EMF"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs/EMF/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+texture = ExtResource("3_3l0hb")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EMFProgress" type="ProgressBar" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs/EMF/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.25
+theme_override_styles/background = SubResource("StyleBoxTexture_aqumb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_c6fdt")
+max_value = 1.0
+step = 0.001
+value = 1.0
+fill_mode = 2
+show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs/EMF/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.5
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs/EMF/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "EMF"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Paper" type="Control" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs"]
+visible = false
+layout_mode = 2
+script = ExtResource("4_o1rxc")
+metadata/_tab_index = 1
+
+[node name="Paper" type="TextureRect" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs/Paper"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_p5eb6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Burn0" type="TextureRect" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs/Paper"]
+visible = false
+modulate = Color(1, 0.515625, 0, 1)
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_i1k58")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_mirhy")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Burn1" type="TextureRect" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs/Paper"]
+visible = false
+modulate = Color(1, 0.328125, 0, 1)
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_i1k58")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_w6lal")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Flashlight" type="Control" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs"]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/HBoxContainer/Panel2/ToolTabs/Flashlight"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("9_w6lal")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="InteractionDescription" type="Label" parent="."]
+custom_minimum_size = Vector2(128, 64)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+pivot_offset = Vector2(64, 0)
+horizontal_alignment = 1
+script = ExtResource("3_4mwe0")

@@ -22,7 +22,7 @@ enum State {
 var current_state = State.IDLE
 
 func _ready():
-	timer.start(3.0)
+	timer.start(10.0)
 
 func _on_timer_timeout():
 	current_state = State.CHASING
@@ -67,7 +67,7 @@ func is_spotted_by_player() -> bool:
 func dissapear ():
 	hide()
 	current_state = State.DISSAPEARING
-	await get_tree().create_timer(0.5).timeout  # short delay before respawning
+	await get_tree().create_timer(randf_range(2.0,5.0)).timeout  # short delay before respawning
 	relocate ()
 	show()
 	current_state = State.CHASING

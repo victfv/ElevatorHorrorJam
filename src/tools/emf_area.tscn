@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://b12wk4ynubnis"]
+
+[ext_resource type="Script" uid="uid://46ia35o5buvg" path="res://src/tools/emf_area.gd" id="1_3yxgv"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3yxgv"]
+resource_local_to_scene = true
+radius = 10.0
+
+[node name="EMFArea" type="Area3D" node_paths=PackedStringArray("shape")]
+collision_layer = 0
+collision_mask = 128
+monitorable = false
+script = ExtResource("1_3yxgv")
+shape = NodePath("CollisionShape3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_3yxgv")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]

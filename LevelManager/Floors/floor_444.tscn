@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://chwrdgx26mx0t"]
+[gd_scene load_steps=20 format=3 uid="uid://chwrdgx26mx0t"]
 
 [ext_resource type="MeshLibrary" uid="uid://dm1xr2elw21od" path="res://assets/Meshlibs/floor_meshlib.tres" id="1_uo33h"]
 [ext_resource type="Script" uid="uid://thqsm0npqqo" path="res://src/tools/gridmap_converter.gd" id="2_bvaob"]
@@ -6,7 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://c6xnd4g6mppkd" path="res://src/objects/classes/desk.tscn" id="4_ahy7n"]
 [ext_resource type="PackedScene" uid="uid://db2vv6c4istwb" path="res://src/objects/classes/couch.tscn" id="5_d8u85"]
 [ext_resource type="PackedScene" uid="uid://6tf7w0nqcwgb" path="res://src/objects/classes/TV.tscn" id="6_huwrt"]
+[ext_resource type="Texture2D" uid="uid://ckigkm5hpdob7" path="res://assets/textures/sprites/Furniture/TV.png" id="7_gvul3"]
 [ext_resource type="PackedScene" uid="uid://bprxwfg44j3tj" path="res://src/objects/classes/wardrobe.tscn" id="7_mk50x"]
+[ext_resource type="PackedScene" uid="uid://bne0ne0ock6df" path="res://src/objects/door/door.tscn" id="8_huwrt"]
+[ext_resource type="Script" uid="uid://c5vasiuru0uxa" path="res://src/rituals/ritual_step.gd" id="11_f51c5"]
+[ext_resource type="PackedScene" uid="uid://b12wk4ynubnis" path="res://src/tools/emf_area.tscn" id="12_dvb4q"]
+[ext_resource type="PackedScene" uid="uid://bsqxp8hnw2h3x" path="res://src/tools/paper_burn_area.tscn" id="13_ypylh"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_bvaob"]
 size = Vector3(42.2534, 1, 69.1583)
@@ -14,6 +19,42 @@ size = Vector3(42.2534, 1, 69.1583)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bvaob"]
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f51c5"]
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("7_gvul3")
+texture_filter = 0
+
+[sub_resource type="GDScript" id="GDScript_f51c5"]
+script/source = "extends Node3D
+
+@export var tv_step: RitualStep
+@export var tv : DynamicObject
+@export var tv_detector: Area3D
+@export var tv_light : SpotLight3D
+
+func _ready() -> void:
+	if tv_step.completed:
+		tv.global_position = tv_detector.global_position
+		tv.freeze = true
+		tv_light.visible = true
+
+
+func _on_tv_detector_body_entered(body: Node3D) -> void:
+	if body == tv and !tv_step.completed:
+		tv_step.complete()
+		tv.freeze = true
+		tv_light.visible = true
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_f51c5"]
+size = Vector3(3, 1, 3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ypylh"]
+radius = 10.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_4caxu"]
+radius = 2.0
 
 [node name="Floor444" type="Node3D"]
 
@@ -255,8 +296,18 @@ transform = Transform3D(-0.99291, 0, 0.118872, 0, 1, 0, -0.118872, 0, -0.99291, 
 [node name="TV" parent="Props" instance=ExtResource("6_huwrt")]
 transform = Transform3D(-0.998384, 0, -0.0568323, 0, 1, 0, 0.0568323, 0, -0.998384, -2.63693, 0.416596, 20.0541)
 
-[node name="TV3" parent="Props" instance=ExtResource("6_huwrt")]
+[node name="CursedTV" parent="Props" instance=ExtResource("6_huwrt")]
 transform = Transform3D(-0.998384, 0, -0.0568323, 0, 1, 0, 0.0568323, 0, -0.998384, -4.61306, 0.416596, 40.0171)
+
+[node name="SpriteMeshInstance" parent="Props/CursedTV" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_f51c5")
+
+[node name="SpotLight3D" parent="Props/CursedTV/SpriteMeshInstance" index="0"]
+visible = false
+light_color = Color(1, 0, 0, 1)
+shadow_enabled = true
+spot_range = 3.0
+spot_angle = 63.9502
 
 [node name="TV4" parent="Props" instance=ExtResource("6_huwrt")]
 transform = Transform3D(0.299574, 0, -0.954073, 0, 1, 0, 0.954073, 0, 0.299574, 17.931, 0.416596, 46.5504)
@@ -284,3 +335,172 @@ transform = Transform3D(-0.0547759, 0, -0.998499, 0, 1, 0, 0.998499, 0, -0.05477
 
 [node name="Wardrobe6" parent="Props" instance=ExtResource("7_mk50x")]
 transform = Transform3D(0.0246939, 0, 0.999695, 0, 1, 0, -0.999695, 0, 0.0246939, -10.8335, 1.31541, 37.6858)
+
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="Door" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 9)
+
+[node name="Door2" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, 7)
+
+[node name="Door3" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 0, 0)
+
+[node name="Door4" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 0, 8)
+
+[node name="Door5" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 18)
+
+[node name="Door6" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 16)
+
+[node name="Door7" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 18)
+
+[node name="Door8" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0, 16)
+
+[node name="Door9" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0, 45)
+
+[node name="Door10" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 49)
+
+[node name="Door11" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 37)
+
+[node name="Door12" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 47)
+
+[node name="Door13" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, 0, 37)
+
+[node name="Door14" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 38)
+
+[node name="Door15" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.5, 0, 50)
+
+[node name="Door16" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5, 0, 27)
+
+[node name="Door17" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0, 24)
+
+[node name="Door18" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9, 0, 21.5)
+
+[node name="Door19" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -6, 0, 14.5)
+
+[node name="Door20" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16, 0, 22.5)
+
+[node name="Door21" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7, 0, 33.5)
+
+[node name="Door22" parent="Doors" instance=ExtResource("8_huwrt")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 17, 0, 4.5)
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 2.8, 9.5)
+layers = 1023
+light_color = Color(1, 0.832031, 0.832031, 1)
+light_cull_mask = 4293919743
+shadow_enabled = true
+shadow_caster_mask = 4293919743
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+distance_fade_shadow = 60.0
+distance_fade_length = 0.0
+spot_range = 6.5
+spot_angle = 67.7687
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 2.8, 31.5)
+layers = 1023
+light_color = Color(1, 0.832031, 0.832031, 1)
+light_cull_mask = 4293919743
+shadow_enabled = true
+shadow_caster_mask = 4293919743
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+distance_fade_shadow = 60.0
+distance_fade_length = 0.0
+spot_range = 6.5
+spot_angle = 67.7687
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2, 2.8, 57.5)
+layers = 1023
+light_color = Color(1, 0.832031, 0.832031, 1)
+light_cull_mask = 4293919743
+shadow_enabled = true
+shadow_caster_mask = 4293919743
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+distance_fade_shadow = 60.0
+distance_fade_length = 0.0
+spot_range = 6.5
+spot_angle = 67.7687
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -6.5, 2.8, 37.5)
+layers = 1023
+light_color = Color(1, 0.832031, 0.832031, 1)
+light_cull_mask = 4293919743
+shadow_enabled = true
+shadow_caster_mask = 4293919743
+distance_fade_enabled = true
+distance_fade_begin = 30.0
+distance_fade_shadow = 60.0
+distance_fade_length = 0.0
+spot_range = 6.5
+spot_angle = 67.7687
+
+[node name="Ritual" type="Node3D" parent="." node_paths=PackedStringArray("tv_step", "tv", "tv_detector", "tv_light")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, 53)
+script = SubResource("GDScript_f51c5")
+tv_step = NodePath("TVStep")
+tv = NodePath("../Props/CursedTV")
+tv_detector = NodePath("TVDetector")
+tv_light = NodePath("../Props/CursedTV/SpriteMeshInstance/SpotLight3D")
+
+[node name="TVStep" type="Node" parent="Ritual"]
+script = ExtResource("11_f51c5")
+ritual_name = "GhostRitual"
+step = "TV"
+metadata/_custom_type_script = "uid://c5vasiuru0uxa"
+
+[node name="TVDetector" type="Area3D" parent="Ritual"]
+collision_layer = 0
+collision_mask = 16
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ritual/TVDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_f51c5")
+
+[node name="EMFArea" parent="Ritual" instance=ExtResource("12_dvb4q")]
+range = 30.0
+
+[node name="PaperBurnArea" parent="Ritual" instance=ExtResource("13_ypylh")]
+color = Color(0.261719, 1, 0.325165, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ritual/PaperBurnArea"]
+shape = SubResource("SphereShape3D_ypylh")
+
+[node name="PaperBurnArea2" parent="Ritual" instance=ExtResource("13_ypylh")]
+color = Color(0.261719, 1, 0.325165, 1)
+strong = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ritual/PaperBurnArea2"]
+shape = SubResource("SphereShape3D_4caxu")
+
+[connection signal="body_entered" from="Ritual/TVDetector" to="Ritual" method="_on_tv_detector_body_entered"]
+
+[editable path="Props/CursedTV"]

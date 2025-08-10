@@ -1,6 +1,7 @@
 extends Area3D
 class_name PanelInteractable
 
+@export var description : String
 @export var panelUI : NumpadUI
 @export var collisionShape : CollisionShape3D
 

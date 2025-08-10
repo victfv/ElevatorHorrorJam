@@ -1,17 +1,62 @@
-[gd_scene load_steps=11 format=3 uid="uid://dij36jou3ckw"]
+[gd_scene load_steps=26 format=3 uid="uid://dij36jou3ckw"]
 
 [ext_resource type="Script" uid="uid://bov67eaou12oc" path="res://LevelManager/Scripts/LevelController.gd" id="1_rulji"]
 [ext_resource type="PackedScene" uid="uid://djvp0m4r78hop" path="res://src/player/Player.tscn" id="2_h5ef7"]
 [ext_resource type="PackedScene" uid="uid://cpny4gqkatb3v" path="res://LevelManager/Levels/Elevator.tscn" id="3_qrwvi"]
+[ext_resource type="Shader" uid="uid://db3qd544hm1lv" path="res://src/shaders/view_blocker_main.gdshader" id="3_rulji"]
 [ext_resource type="PackedScene" uid="uid://c3q3f81rhemtl" path="res://LevelManager/Prefabs/elevator_panel.tscn" id="4_jr2hk"]
 [ext_resource type="PackedScene" uid="uid://yjn66y4wpl2l" path="res://LevelManager/Prefabs/panel.tscn" id="5_my05v"]
 [ext_resource type="Script" uid="uid://dff465rh567m7" path="res://LevelManager/Scripts/FloorController.gd" id="6_61nwx"]
-[ext_resource type="PackedScene" uid="uid://c4hx6lwa87364" path="res://LevelManager/Levels/floor1.tscn" id="7_w6pu5"]
-[ext_resource type="PackedScene" uid="uid://rxgyquvxuera" path="res://LevelManager/Levels/floor2.tscn" id="8_6nuvh"]
-[ext_resource type="PackedScene" uid="uid://chwrdgx26mx0t" path="res://LevelManager/Floors/floor_444.tscn" id="9_rulji"]
+[ext_resource type="Script" uid="uid://rbnrkgpiv43v" path="res://LevelManager/Levels/cover.gd" id="7_qrwvi"]
+[ext_resource type="PackedScene" uid="uid://chwrdgx26mx0t" path="res://LevelManager/Floors/floor_444.tscn" id="8_bqiul"]
+[ext_resource type="Script" uid="uid://d285xj2bu5i74" path="res://src/input/input_receiver.gd" id="8_jr2hk"]
+[ext_resource type="PackedScene" uid="uid://dvhk2gxaayqug" path="res://LevelManager/Floors/floor_1.tscn" id="9_rulji"]
+[ext_resource type="Script" uid="uid://bax6dtlft26yc" path="res://src/rituals/ritual.gd" id="10_h5ef7"]
+[ext_resource type="PackedScene" uid="uid://dh26d1frida0m" path="res://LevelManager/Floors/floor_28.tscn" id="12_my05v"]
+[ext_resource type="PackedScene" uid="uid://n56vqbwhbcb6" path="res://LevelManager/Floors/floor_55.tscn" id="13_6nuvh"]
+[ext_resource type="PackedScene" uid="uid://b12wk4ynubnis" path="res://src/tools/emf_area.tscn" id="14_61nwx"]
+[ext_resource type="PackedScene" uid="uid://cn2wvp5j45j31" path="res://LevelManager/Floors/floor_13.tscn" id="14_x870q"]
+[ext_resource type="PackedScene" uid="uid://brd4excojtdo8" path="res://Ghosts/Ghost.tscn" id="17_x870q"]
 
 [sub_resource type="Environment" id="Environment_oro32"]
 background_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_v5qoq"]
+offsets = PackedFloat32Array(0.0855856, 0.788288)
+colors = PackedColorArray(0.347656, 0.347656, 0.347656, 1, 0.949219, 0.949219, 0.949219, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_v5qoq"]
+seed = 19580
+fractal_octaves = 6
+fractal_lacunarity = 2.015
+fractal_gain = 0.86
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jtmj1"]
+seamless = true
+color_ramp = SubResource("Gradient_v5qoq")
+noise = SubResource("FastNoiseLite_v5qoq")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rulji"]
+viewport_path = NodePath("Vis/OutviewRenderer")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_h5ef7"]
+viewport_path = NodePath("Vis/VisRenderer")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qrwvi"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_rulji")
+shader_parameter/shadows = SubResource("ViewportTexture_h5ef7")
+shader_parameter/shadow_view = SubResource("ViewportTexture_rulji")
+shader_parameter/noise = SubResource("NoiseTexture2D_jtmj1")
+shader_parameter/uv_scale = 0.025
+shader_parameter/noise_scroll_1 = Vector2(0.003, 0.005)
+shader_parameter/noise_scroll_2 = Vector2(0.003, 0.005)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5ef7"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 0)
 
 [node name="Level" type="Node3D" node_paths=PackedStringArray("elevator", "floorController", "numpad", "panel")]
 script = ExtResource("1_rulji")
@@ -24,9 +69,26 @@ panel = NodePath("Elevator/Panel")
 environment = SubResource("Environment_oro32")
 
 [node name="Player" parent="." instance=ExtResource("2_h5ef7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.332, 0, 2.473)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.46543, 0, 51.3267)
 
-[node name="Elevator" parent="." instance=ExtResource("3_qrwvi")]
+[node name="Camera3D" parent="Player" index="1"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.46543, 15, 51.3267)
+
+[node name="ViewBlockerMain" parent="Player/Vis" index="1"]
+material_override = SubResource("ShaderMaterial_qrwvi")
+
+[node name="Camera3D" parent="Player/Vis/VisRenderer" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.46543, 15, 51.3267)
+
+[node name="Camera3D" parent="Player/Vis/OutviewRenderer" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 2.46543, 15, 51.3267)
+
+[node name="Compass" parent="Player/HUD/VBoxContainer/HBoxContainer/Panel/HBoxContainer/VBoxContainer2/Control" index="0" node_paths=PackedStringArray("elevator", "player")]
+elevator = NodePath("../../../../../../../../../Elevator/Panel")
+player = NodePath("../../../../../../../..")
+
+[node name="Elevator" parent="." node_paths=PackedStringArray("cover") instance=ExtResource("3_qrwvi")]
+cover = NodePath("Cover")
 
 [node name="ElevatorPanel" parent="Elevator" node_paths=PackedStringArray("levelController") instance=ExtResource("4_jr2hk")]
 visible = false
@@ -34,13 +96,54 @@ levelController = NodePath("../..")
 
 [node name="Panel" parent="Elevator" node_paths=PackedStringArray("panelUI") instance=ExtResource("5_my05v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.62352, 2.80944)
+description = "Elevator Panel"
 panelUI = NodePath("../ElevatorPanel")
 
-[node name="Floor" type="Node3D" parent="."]
-script = ExtResource("6_61nwx")
-floor_scenes = {
-11: ExtResource("7_w6pu5"),
-26: ExtResource("8_6nuvh")
-}
+[node name="Cover" type="CSGBox3D" parent="Elevator"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00978, 3.94256, 1.59108)
+visible = false
+material_override = SubResource("StandardMaterial3D_h5ef7")
+size = Vector3(60, 1, 60)
+script = ExtResource("7_qrwvi")
 
-[node name="Floor444" parent="Floor" instance=ExtResource("9_rulji")]
+[node name="Cover2" type="CSGBox3D" parent="Elevator/Cover"]
+operation = 2
+size = Vector3(7, 2, 3.5)
+
+[node name="InputReceiver" type="Node" parent="Elevator"]
+script = ExtResource("8_jr2hk")
+metadata/_custom_type_script = "uid://d285xj2bu5i74"
+
+[node name="Floor" type="Node3D" parent="." node_paths=PackedStringArray("current_floor_instance")]
+script = ExtResource("6_61nwx")
+floor_scenes = Dictionary[int, PackedScene]({
+1: ExtResource("9_rulji"),
+13: ExtResource("14_x870q"),
+28: ExtResource("12_my05v"),
+55: ExtResource("13_6nuvh"),
+444: ExtResource("8_bqiul")
+})
+current_floor_instance = NodePath("Floor1")
+
+[node name="Floor1" parent="Floor" instance=ExtResource("9_rulji")]
+
+[node name="Rituals" type="Node" parent="."]
+
+[node name="GhostRitual" type="Node" parent="Rituals"]
+script = ExtResource("10_h5ef7")
+steps = Dictionary[String, bool]({
+"Bell": false,
+"F28": false,
+"TV": false
+})
+metadata/_custom_type_script = "uid://bax6dtlft26yc"
+
+[node name="EMFArea" parent="." instance=ExtResource("14_61nwx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 36.5)
+
+[node name="Ghosts" type="Node3D" parent="."]
+
+[node name="Ghost" parent="Ghosts" instance=ExtResource("17_x870q")]
+
+[editable path="Player"]
+[editable path="Player/HUD"]
