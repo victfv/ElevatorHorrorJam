@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=4 uid="uid://djvp0m4r78hop"]
+[gd_scene load_steps=46 format=4 uid="uid://djvp0m4r78hop"]
 
 [ext_resource type="Script" uid="uid://bumrdo2p02hqx" path="res://src/player/player.gd" id="1_tehm3"]
 [ext_resource type="Script" uid="uid://d285xj2bu5i74" path="res://src/input/input_receiver.gd" id="2_chb7w"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dcarw2ul6l8my" path="res://src/UI/hud.tscn" id="15_lnh6v"]
 [ext_resource type="Script" uid="uid://cmxt72d7muf7l" path="res://src/player/emf_detector.gd" id="17_1wxdb"]
 [ext_resource type="Script" uid="uid://c843f5tk3regm" path="res://src/player/tool_manager.gd" id="18_tm4vc"]
+[ext_resource type="PackedScene" uid="uid://c6ap20ct04mit" path="res://src/UI/Menu/pause_menu.tscn" id="19_ledjb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g641l"]
 friction = 0.0
@@ -387,6 +388,9 @@ script = SubResource("GDScript_wvcio")
 
 [node name="HUD" parent="." instance=ExtResource("15_lnh6v")]
 
+[node name="SanityBar" parent="HUD/VBoxContainer/HBoxContainer/Panel/HBoxContainer/VBoxContainer" index="0" node_paths=PackedStringArray("player")]
+player = NodePath("../../../../../../..")
+
 [node name="InteractionDescription" parent="HUD" index="1" node_paths=PackedStringArray("interaction", "camera")]
 interaction = NodePath("../../Rotator/HD/InteractionRay")
 camera = NodePath("../../Camera3D")
@@ -408,7 +412,14 @@ script = ExtResource("18_tm4vc")
 tool_tabs = NodePath("../HUD/VBoxContainer/HBoxContainer/Panel2/ToolTabs")
 flashlight = NodePath("../Rotator/Flashlight")
 
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("19_ledjb")]
+visible = false
+
 [connection signal="action" from="InputReceiver" to="Rotator/HD/InteractionRay" method="interact"]
 [connection signal="change_tool" from="InputReceiver" to="ToolManager" method="_on_input_receiver_change_tool"]
+[connection signal="pause" from="InputReceiver" to="CanvasLayer/PauseMenu" method="open"]
 
 [editable path="HUD"]

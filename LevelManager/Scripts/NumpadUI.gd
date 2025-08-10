@@ -2,6 +2,8 @@ extends Control
 class_name NumpadUI
 @export var display_label: Label
 @export var levelController : LevelController
+@export var input_receiver: InputReceiver
+@export var _1: Button
 
 var current_input := ""
 
@@ -38,3 +40,11 @@ func _on_enter_pressed():
 
 func _on_close_button_pressed():
 	self.visible = false
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		_1.grab_focus()
+		input_receiver.register()
+	else:
+		input_receiver.unregister()

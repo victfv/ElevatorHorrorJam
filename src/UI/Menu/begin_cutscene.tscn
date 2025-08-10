@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://xrkjcfxnwbr7"]
+
+[ext_resource type="Script" uid="uid://b7nsxku4hsl1u" path="res://src/UI/Menu/begin_cutscene.gd" id="1_up5qa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_up5qa"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="BeginCutscene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_up5qa")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_up5qa")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "You have been hired by the building's owner to cleanse it of the entity that haunts it.
+Of the tenants that didn't leave, all went insane.
+You identified a ritual that can stop the entity.
+Although the building only has 4 floors, you must access the world unseen.
+The places that lie dormant, guarding secrets.
+There is where you'll find the means to stop the entity."
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -1,0 +1,158 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6ap20ct04mit"]
+
+[ext_resource type="Script" uid="uid://dmfo0miygogs8" path="res://src/UI/Menu/pause_menu.gd" id="1_6exvt"]
+[ext_resource type="Script" uid="uid://d285xj2bu5i74" path="res://src/input/input_receiver.gd" id="2_axeqa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_epyhs"]
+bg_color = Color(0, 0, 0, 0.553)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6exvt"]
+bg_color = Color(0.496094, 0.443529, 0.387573, 1)
+
+[node name="PauseMenu" type="Control" node_paths=PackedStringArray("quit", "input_receiver", "resume")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_6exvt")
+quit = NodePath("Panel/CenterContainer/Panel/HBoxContainer/VBoxContainer/Quit")
+input_receiver = NodePath("InputReceiver")
+resume = NodePath("Panel/CenterContainer/Panel/HBoxContainer/VBoxContainer/Resume")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_epyhs")
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Panel/CenterContainer"]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6exvt")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/CenterContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Resume" type="Button" parent="Panel/CenterContainer/Panel/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Resume"
+
+[node name="Options" type="Button" parent="Panel/CenterContainer/Panel/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+disabled = true
+text = "Options"
+
+[node name="Quit" type="Button" parent="Panel/CenterContainer/Panel/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+text = "Quit"
+
+[node name="TabContainer" type="TabContainer" parent="Panel/CenterContainer/Panel/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 0
+
+[node name="Ritual" type="Control" parent="Panel/CenterContainer/Panel/HBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/CenterContainer/Panel/HBoxContainer/TabContainer/Ritual"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="Panel/CenterContainer/Panel/HBoxContainer/TabContainer/Ritual/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+text = "1 - Go to elevator.
+2 - Go to floor 444.
+3 - Move the red TV to where EMF is highest and the paper burns green.
+4 - Go to floor 28.
+5 - Go to floor 55.
+6 - Ring the bell. The EMF is high around it.
+7 - Go to floor 13.
+8 - Burn the bones. Use EMF to find.
+9 - Go to floor 1 and leave."
+autowrap_mode = 3
+
+[node name="Controls" type="Control" parent="Panel/CenterContainer/Panel/HBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/CenterContainer/Panel/HBoxContainer/TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Label" type="Label" parent="Panel/CenterContainer/Panel/HBoxContainer/TabContainer/Controls/MarginContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Move: 
+WASD / Left Stick
+
+Look:
+Mouse/ Right Stick
+
+Interact:
+Left Mouse Button / RT / L2
+Hold to drag objects.
+
+Change Tool:
+Scroll Wheel / DPad L/ DPad R
+
+Pause/Journal:
+Tab / Start / Menu"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="InputReceiver" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("2_axeqa")
+metadata/_custom_type_script = "uid://d285xj2bu5i74"
+
+[connection signal="pressed" from="Panel/CenterContainer/Panel/HBoxContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Panel/CenterContainer/Panel/HBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pause" from="InputReceiver" to="." method="close"]

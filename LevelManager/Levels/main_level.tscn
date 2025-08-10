@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dij36jou3ckw"]
+[gd_scene load_steps=28 format=3 uid="uid://dij36jou3ckw"]
 
 [ext_resource type="Script" uid="uid://bov67eaou12oc" path="res://LevelManager/Scripts/LevelController.gd" id="1_rulji"]
 [ext_resource type="PackedScene" uid="uid://djvp0m4r78hop" path="res://src/player/Player.tscn" id="2_h5ef7"]
@@ -57,6 +57,17 @@ shader_parameter/noise_scroll_2 = Vector2(0.003, 0.005)
 transparency = 1
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 0)
+
+[sub_resource type="GDScript" id="GDScript_x870q"]
+script/source = "extends Node3D
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed(\"PAUSE\"):
+		queue_free()
+"
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_x870q"]
+size = Vector3(4.865, 5.775, 1)
 
 [node name="Level" type="Node3D" node_paths=PackedStringArray("elevator", "floorController", "numpad", "panel")]
 script = ExtResource("1_rulji")
@@ -143,7 +154,49 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, 36.5)
 
 [node name="Ghosts" type="Node3D" parent="."]
 
-[node name="Ghost" parent="Ghosts" instance=ExtResource("17_x870q")]
+[node name="Ghost" parent="Ghosts" node_paths=PackedStringArray("ritual") instance=ExtResource("17_x870q")]
+ritual = NodePath("../../Rituals/GhostRitual")
+
+[node name="Tutorial" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 48)
+script = SubResource("GDScript_x870q")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Tutorial"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tutorial/StaticBody3D"]
+shape = SubResource("BoxShape3D_x870q")
+
+[node name="Control" type="Control" parent="Tutorial"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Tutorial/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Tutorial/Control/CenterContainer"]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Tutorial/Control/CenterContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Press Tab/Start to see your journal."
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [editable path="Player"]
 [editable path="Player/HUD"]

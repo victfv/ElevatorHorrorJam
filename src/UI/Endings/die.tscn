@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://wxtd1ec05ceo"]
+
+[ext_resource type="Script" uid="uid://coprh7v1n2m8h" path="res://src/UI/Endings/end_screen.gd" id="1_fteyt"]
+[ext_resource type="Script" uid="uid://d285xj2bu5i74" path="res://src/input/input_receiver.gd" id="2_oq8lk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0dy36"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="ExitExor" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fteyt")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0dy36")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "It was too much for you.
+The torment you went through in that place drove you to insanity.
+You'll spend the rest of your life in fear.
+Jumping at every noise.
+Hiding from every sillouete.
+You'll never be whole again."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputReceiver" type="Node" parent="."]
+script = ExtResource("2_oq8lk")
+auto_register = true
+metadata/_custom_type_script = "uid://d285xj2bu5i74"
+
+[connection signal="action" from="InputReceiver" to="." method="_on_input_receiver_action"]

@@ -9,10 +9,17 @@ var l_udlr : Vector2
 
 signal action(state : bool)
 signal change_tool(dir : int)
+signal pause
+func reset() -> void:
+	action.emit(false)
+	udlr = Vector2()
 
 func _ready() -> void:
 	if auto_register:
 		register()
+
+func _exit_tree() -> void:
+	unregister()
 
 func register() ->void:
 	InputManager.register_receiver(self)

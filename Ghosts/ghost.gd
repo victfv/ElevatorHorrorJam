@@ -9,7 +9,7 @@ enum State {
 	CHASING,
 	DISSAPEARING
 }
-
+@export var ritual : Ritual
 @export var max_speed := 8.0           # Speed when far
 @export var min_speed := 2.0           # Speed when very close
 @export var stop_distance := 1.0       # How close before stopping
@@ -22,7 +22,11 @@ enum State {
 var current_state = State.IDLE
 
 func _ready():
+	ritual.ritual_bones_burned.connect(die)
 	timer.start(10.0)
+
+func die() -> void:
+	queue_free()
 
 func _on_timer_timeout():
 	current_state = State.CHASING
@@ -35,13 +39,17 @@ func _physics_process(delta: float) -> void:
 	if current_state == State.CHASING:
 		chase_player()
 
+const HPI : float = PI/2.0
+
 func chase_player ():
 	if player == null:
 		return
 
 	var direction = (player.global_position - global_position)
 	var distance = direction.length()
-
+	
+	rotation.y = -Vector2(direction.x,direction.z).angle() - HPI
+	
 	if distance <= stop_distance:
 		velocity = Vector3.ZERO
 		move_and_slide()

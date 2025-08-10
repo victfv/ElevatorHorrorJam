@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3q3f81rhemtl"]
+[gd_scene load_steps=3 format=3 uid="uid://c3q3f81rhemtl"]
 
 [ext_resource type="Script" uid="uid://dtdh80ojfdyym" path="res://LevelManager/Scripts/NumpadUI.gd" id="1_j2yuy"]
+[ext_resource type="Script" uid="uid://d285xj2bu5i74" path="res://src/input/input_receiver.gd" id="2_hvo6y"]
 
-[node name="ElevatorPanel" type="Control" node_paths=PackedStringArray("display_label")]
+[node name="ElevatorPanel" type="Control" node_paths=PackedStringArray("display_label", "input_receiver", "_1")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,6 +12,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_j2yuy")
 display_label = NodePath("Panel/Label")
+input_receiver = NodePath("InputReceiver")
+_1 = NodePath("Panel/GridContainer/1")
 
 [node name="Panel" type="Panel" parent="."]
 layout_mode = 0
@@ -121,3 +124,9 @@ offset_left = 315.0
 offset_top = 11.0
 offset_right = 340.0
 offset_bottom = 30.0
+
+[node name="InputReceiver" type="Node" parent="."]
+script = ExtResource("2_hvo6y")
+metadata/_custom_type_script = "uid://d285xj2bu5i74"
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
