@@ -161,6 +161,11 @@ shader = ExtResource("3_g641l")
 [sub_resource type="GDScript" id="GDScript_wvcio"]
 script/source = "extends Label
 
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.keycode == KEY_P:
+			visible = !visible
+
 func _process(delta: float) -> void:
 	text = \"FPS:%0.2f\" % Engine.get_frames_per_second()
 	text += \"\\nFrametime:%0.3f\" % delta
@@ -382,6 +387,7 @@ size = 16.0
 far = 30.0
 
 [node name="Label" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 script = SubResource("GDScript_wvcio")

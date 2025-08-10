@@ -97,7 +97,8 @@ theme_override_constants/margin_bottom = 4
 [node name="Label" type="Label" parent="Panel/CenterContainer/Panel/HBoxContainer/TabContainer/Ritual/MarginContainer"]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-text = "1 - Go to elevator.
+text = "Remember: It cannot stand to be seen.
+1 - Go to elevator.
 2 - Go to floor 444.
 3 - Move the red TV to where EMF is highest and the paper burns green.
 4 - Go to floor 28.
