@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0g8rcohq7c3e"]
+
+[ext_resource type="Script" uid="uid://pq4cynbuq7qd" path="res://src/objects/object_base.gd" id="1_3m1bo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3m1bo"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3m1bo"]
+
+[node name="Mueble" type="RigidBody3D"]
+collision_layer = 16
+collision_mask = 18
+script = ExtResource("1_3m1bo")
+metadata/_custom_type_script = "uid://pq4cynbuq7qd"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3m1bo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 1025
+mesh = SubResource("BoxMesh_3m1bo")

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ctfu5g4sggfs5"]
+
+[ext_resource type="Script" uid="uid://bot270gnsk8fk" path="res://Ghosts/ghost_mover.gd" id="1_r2r6h"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e138n"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_r2r6h"]
+
+[node name="GhostMover" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_r2r6h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_e138n")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+layers = 4
+mesh = SubResource("CapsuleMesh_r2r6h")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
